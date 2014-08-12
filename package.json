@@ -1,0 +1,15 @@
+{
+  "name": "2gis-materials",
+  "version": "0.0.0",
+  "description": "Heatmaps plugin demo",
+  "main": "index.js",
+  "dependencies": {
+    "heatmap.js": "git://github.com/2gis/heatmap.js#develop"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "BSD-2-Clause"
+}

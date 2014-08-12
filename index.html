@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset=utf-8 />
+        <title>API карт 2ГИС</title>
+
+        <link rel="stylesheet" type="text/css" href="styles/reset.css" />
+        <link rel="stylesheet" type="text/css" href="styles/typography.css" />
+        <link rel="stylesheet" type="text/css" href="styles/forms.css" />
+        <link rel="stylesheet" type="text/css" href="styles/app.css" />
+
+        <!--<link rel="stylesheet" type="text/css" href="scripts/leaflet-0.7.3/leaflet.css" />
+
+        <script src="scripts/leaflet-0.7.3/leaflet-src.js"></script>
+
+        <script src="scripts/heatmap.js-develop/build/heatmap.js"></script>
+        <script src="scripts/heatmap.js-develop/plugins/leaflet-heatmap.js"></script>-->
+
+        <script src="http://maps.api.2gis.ru/2.0/loader.js?pkg=full" data-id="dgLoader"></script>
+
+        <script src="scripts/lib.js"></script>
+
+        <script src="scripts/app.js"></script>
+    </head>
+    <body>
+        <div id="mapWrap">
+            <div id="map" style="width: 500px; height: 400px;"></div>
+            <dl id="bColorLegend"></dl>
+        </div>
+
+        <form>
+            <select id="sbCity"></select>
+
+            <fieldset id="bMaterials">
+                <legend>Материал строения</legend>
+            </fieldset>
+        </form>
+    </body>
+</html>

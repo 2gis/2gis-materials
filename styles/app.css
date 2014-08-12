@@ -1,0 +1,47 @@
+
+body {
+    padding: 1.5em;
+}
+
+#mapWrap {
+    margin-bottom: 1.5em;
+    overflow: hidden;
+}
+
+#mapWrap > * {
+    float: left;
+}
+
+.leaflet-zoom-hide {
+    position: absolute !important;
+    top: 0;
+    left: 0;
+}
+
+#bColorLegend {
+    margin-left: 2em;
+}
+
+#bColorLegend dt {
+    line-height: 1.2em;
+}
+
+#bColorLegend dt span {
+    width: 1.2em;
+    height: 1.2em;
+    display: inline-block;
+    vertical-align: top;
+}
+
+#bColorLegend dd {
+    margin: -1.2em 0 0.7em 1.8em;
+    line-height: 1.2em;
+}
+
+#sbCity {
+    margin-bottom: 1.5em;
+}
+
+#bMaterials label {
+    display: block;
+}
