@@ -4,7 +4,9 @@
   "description": "Heatmaps plugin demo",
   "main": "index.js",
   "dependencies": {
-    "heatmap.js": "git://github.com/2gis/heatmap.js#develop"
+    "heatmap.js": "git://github.com/2gis/heatmap.js#develop",
+    "node-csv-json": "^0.2.1",
+    "transliteration.cyr": "^1.0.4"
   },
   "devDependencies": {},
   "scripts": {

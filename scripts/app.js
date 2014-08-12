@@ -2,24 +2,24 @@
 var cities;
 
 var materials = {
-    'Дерево': { color: '#00FF35' },
-    'Кирпич': { color: '#008FFF' },
-    'Панель': { color: '#FFEE00' },
-    'Бетон': { color: '#FF0000' },
-    'Металл': { color: '#C000FF' }
+    'Дерево': { color: '#b47e4d' },
+    'Кирпич': { color: '#ff6464' },
+    'Панель': { color: '#008965' },
+    'Бетон': { color: '#a04089' },
+    'Металл': { color: '#0088ff' }
 };
 
 var heatmapLayerConf = {
     // radius should be small ONLY if scaleRadius is true (or small radius is intended)
     // if scaleRadius is false it will be the constant radius used in pixels
-    radius: 0.0006,
+    radius: 0.0005,
 
     maxOpacity: 0.7,
 
     // scales the radius based on map zoom
     scaleRadius: true,
 
-    blur: 0.7,
+    blur: 1.0,
 
     // if set to false the heatmap uses the global maximum for colorization
     // if activated: uses the data maximum within the current map boundaries
