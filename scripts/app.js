@@ -1,6 +1,26 @@
 
 var Rift = require('./Rift/Rift');
 
+/**
+ * @param {string} hex
+ * @return {Array{ 0:int; 1:int; 2:int; }}
+ */
+function hexToRGB(hex) {
+    if (hex.charAt(0) == '#') {
+        hex = hex.slice(1);
+    }
+
+    if (hex.length == 3) {
+        hex = hex.charAt(0) + hex.charAt(0) + hex.charAt(1) + hex.charAt(1) + hex.charAt(2) + hex.charAt(2);
+    }
+
+    return [
+        Number('0x' + hex.slice(0, 2)),
+        Number('0x' + hex.slice(2, 4)),
+        Number('0x' + hex.slice(4))
+    ];
+}
+
 var materials = {
     'Дерево': { color: '#b47e4d', enName: 'wood' },
     'Кирпич': { color: '#ff6464', enName: 'brick' },
@@ -108,11 +128,13 @@ var MaterialsApp = Rift.createClass(Rift.Emitter, {
 
     _createHeatmapLayers: function() {
         this._heatmapLayers = Object.keys(materials).reduce(function(heatmapLayers, materialName) {
+            var color = materials[materialName].color;
+
             heatmapLayers[materialName] = new HeatmapOverlay(
                 Rift.object.assign(Object.create(heatmapLayerConf), {
                     gradient: {
-                        0: 'rgba(0,0,0,0)',
-                        1: materials[materialName].color
+                        0: krion.tmpl.format('rgba(%1, %2, %3, 0)', hexToRGB(color)),
+                        1: color
                     }
                 })
             );
