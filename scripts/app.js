@@ -21,6 +21,27 @@ function hexToRGB(hex) {
     ];
 }
 
+/**
+ * @param {string} url
+ * @param {Function} callback
+ */
+function addScript(url, callback) {
+    var script = document.createElement('script');
+
+    script.src = url;
+    script.async = true;
+
+    script.onload = script.onerror = function(evt) {
+        script.onload = script.onerror = null;
+
+        setTimeout(function() {
+            callback(evt.type == 'load');
+        }, 1);
+    };
+
+    (document.head || document.documentElement).appendChild(script);
+}
+
 var materials = {
     'Дерево': { color: '#b47e4d', enName: 'wood' },
     'Кирпич': { color: '#ff6464', enName: 'brick' },
@@ -119,8 +140,8 @@ var MaterialsApp = Rift.createClass(Rift.Emitter, {
      * @param {Function} callback
      */
     _loadScripts: function(callback) {
-        Rift.dom.addScript('node_modules/heatmap.js/build/heatmap.js', function() {
-            Rift.dom.addScript('node_modules/heatmap.js/plugins/leaflet-heatmap.js', function() {
+        addScript('node_modules/heatmap.js/build/heatmap.js', function() {
+            addScript('node_modules/heatmap.js/plugins/leaflet-heatmap.js', function() {
                 callback.call(this);
             });
         });
@@ -133,7 +154,7 @@ var MaterialsApp = Rift.createClass(Rift.Emitter, {
             heatmapLayers[materialName] = new HeatmapOverlay(
                 Rift.object.assign(Object.create(heatmapLayerConf), {
                     gradient: {
-                        0: krion.tmpl.format('rgba(%1, %2, %3, 0)', hexToRGB(color)),
+                        0: Rift.tmpl.format('rgba(%1, %2, %3, 0)', hexToRGB(color)),
                         1: color
                     }
                 })
@@ -244,6 +265,8 @@ var MaterialsApp = Rift.createClass(Rift.Emitter, {
             }
 
             var transliteratedCityName = link.dataset.transliteratedName;
+
+            this._map.panTo([50, 30]);
 
             this._setCityInControlPanel(transliteratedCityName);
 

@@ -336,29 +336,6 @@
 
     Rift.dom.removeNode = removeNode;
 
-    /**
-     * @param {string} url
-     * @param {Function} callback
-     */
-    function addScript(url, callback) {
-        var script = document.createElement('script');
-
-        script.src = url;
-        script.async = true;
-
-        script.onload = script.onerror = function(evt) {
-            script.onload = script.onerror = null;
-
-            setTimeout(function() {
-                callback(evt.type == 'load');
-            }, 1);
-        };
-
-        (document.head || document.documentElement).appendChild(script);
-    }
-
-    Rift.dom.addScript = addScript;
-
     // AJAX utils
 
     Rift.ajax = {};
