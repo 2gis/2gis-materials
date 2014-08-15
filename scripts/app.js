@@ -1,5 +1,5 @@
 
-var krion = require('./krion/krion');
+var Rift = require('./Rift/Rift');
 
 var materials = {
     'Дерево': { color: '#b47e4d', enName: 'wood' },
@@ -31,7 +31,7 @@ var heatmapLayerConf = {
     valueField: 'count'
 };
 
-var MaterialsApp = krion.createClass(krion.Emitter, {
+var MaterialsApp = Rift.createClass(Rift.Emitter, {
     __name: 'MaterialsApp',
 
     _cities: null,
@@ -55,7 +55,7 @@ var MaterialsApp = krion.createClass(krion.Emitter, {
     _btnReadMore: null,
 
     _init: function() {
-        krion.bindListeners(this);
+        Rift.bindListeners(this);
 
         this.element = document.body;
 
@@ -70,7 +70,7 @@ var MaterialsApp = krion.createClass(krion.Emitter, {
             this._loadScripts(function() {
                 this._createHeatmapLayers();
 
-                krion.ajax.jsonp('data/cities/index.jsonp', function(cities) {
+                Rift.ajax.jsonp('data/cities/index.jsonp', function(cities) {
                     this._cities = cities.reduce(function(cities, cityData) {
                         cities[cityData.transliteratedName] = cityData;
                         return cities;
@@ -99,8 +99,8 @@ var MaterialsApp = krion.createClass(krion.Emitter, {
      * @param {Function} callback
      */
     _loadScripts: function(callback) {
-        krion.dom.addScript('node_modules/heatmap.js/build/heatmap.js', function() {
-            krion.dom.addScript('node_modules/heatmap.js/plugins/leaflet-heatmap.js', function() {
+        Rift.dom.addScript('node_modules/heatmap.js/build/heatmap.js', function() {
+            Rift.dom.addScript('node_modules/heatmap.js/plugins/leaflet-heatmap.js', function() {
                 callback.call(this);
             });
         });
@@ -109,7 +109,7 @@ var MaterialsApp = krion.createClass(krion.Emitter, {
     _createHeatmapLayers: function() {
         this._heatmapLayers = Object.keys(materials).reduce(function(heatmapLayers, materialName) {
             heatmapLayers[materialName] = new HeatmapOverlay(
-                krion.object.assign(Object.create(heatmapLayerConf), {
+                Rift.object.assign(Object.create(heatmapLayerConf), {
                     gradient: {
                         0: 'rgba(0,0,0,0)',
                         1: materials[materialName].color
@@ -131,13 +131,13 @@ var MaterialsApp = krion.createClass(krion.Emitter, {
         Object.keys(this._cities).forEach(function(cityTransliteratedName) {
             var cityData = this._cities[cityTransliteratedName];
 
-            var link = krion.dom.createElementFromHTML(
+            var link = Rift.dom.createElementFromHTML(
                 '<a data-transliterated-name="%1" href="#%1">%2</a>',
                 cityTransliteratedName,
                 cityData.name
             );
 
-            var li = krion.dom.createElement('li', null, [link]);
+            var li = Rift.dom.createElement('li', null, [link]);
 
             bcCityListLinks[cityTransliteratedName] = link;
             bCityList.appendChild(li);
@@ -170,7 +170,7 @@ var MaterialsApp = krion.createClass(krion.Emitter, {
         var bMaterials = this._bMaterials;
 
         this._bcMaterialOptions = Object.keys(materials).reduce(function(bcMaterialOptions, materialName) {
-            var label = krion.dom.createElementFromHTML(
+            var label = Rift.dom.createElementFromHTML(
                 '<label class="chb _material-%1"><input type="checkbox" checked="checked" /><span></span>%2</label>',
                 materials[materialName].enName,
                 materialName
@@ -254,7 +254,7 @@ var MaterialsApp = krion.createClass(krion.Emitter, {
         }
 
         var loadingEmitter = this._materialDataLoadingEmitter ||
-            (this._materialDataLoadingEmitter = new krion.Emitter());
+            (this._materialDataLoadingEmitter = new Rift.Emitter());
 
         loadingEmitter.once('loaded:' + transliteratedCityName, callback, this);
 
@@ -264,7 +264,7 @@ var MaterialsApp = krion.createClass(krion.Emitter, {
 
         cityData.loadingMaterialData = true;
 
-        krion.ajax.jsonp(
+        Rift.ajax.jsonp(
             'data/cities/materials/' + transliteratedCityName + '.jsonp',
             function(materialData) {
                 cityData.loadingMaterialData = false;

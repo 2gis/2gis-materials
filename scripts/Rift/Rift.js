@@ -3,7 +3,7 @@
 
     var global = this;
 
-    function krion() {
+    function Rift() {
         //
     }
 
@@ -16,11 +16,11 @@
         return ++uidCounter;
     }
 
-    krion.nextUID = nextUID;
+    Rift.nextUID = nextUID;
 
     // Object utils
 
-    krion.object = {};
+    Rift.object = {};
 
     /**
      * @param {Object} obj
@@ -30,7 +30,7 @@
         return obj._uid || (obj._uid = ++uidCounter);
     }
 
-    krion.object.getUID = getUID;
+    Rift.object.getUID = getUID;
 
     /**
      * @param {Object} obj
@@ -45,7 +45,7 @@
         return obj;
     }
 
-    krion.object.assign = assign;
+    Rift.object.assign = assign;
 
     /**
      * @param {Object} obj
@@ -60,7 +60,7 @@
         return obj;
     }
 
-    krion.object.mixin = mixin;
+    Rift.object.mixin = mixin;
 
     /**
      * @param {Object} obj
@@ -70,7 +70,7 @@
         return mixin(Object.create(Object.getPrototypeOf(obj)), obj);
     }
 
-    krion.object.clone = clone;
+    Rift.object.clone = clone;
 
     // Class utils
 
@@ -123,7 +123,7 @@
         return constructor;
     }
 
-    krion.createClass = createClass;
+    Rift.createClass = createClass;
 
     var reListenerName = /^_on[A-Z]/;
 
@@ -156,11 +156,11 @@
         }
     }
 
-    krion.bindListeners = bindListeners;
+    Rift.bindListeners = bindListeners;
 
     // RegExp utils
 
-    krion.regex = {};
+    Rift.regex = {};
 
     /**
      * @param {string} re
@@ -170,11 +170,11 @@
         return re.replace(/([?![+\-\.]^|{}(=:)$\/\\*])/g, '\\$1');
     }
 
-    krion.regex.escape = escape;
+    Rift.regex.escape = escape;
 
     // Template utils
 
-    krion.tmpl = {};
+    Rift.tmpl = {};
 
     /**
      * @param {string} str
@@ -191,11 +191,11 @@
         });
     }
 
-    krion.tmpl.format = format;
+    Rift.tmpl.format = format;
 
     // DOM utils
 
-    krion.dom = {};
+    Rift.dom = {};
 
     /**
      * @param {Node} node
@@ -223,7 +223,7 @@
         return false;
     }
 
-    krion.dom.isDescendantOf = isDescendantOf;
+    Rift.dom.isDescendantOf = isDescendantOf;
 
     /**
      * @param {Node} node
@@ -235,7 +235,7 @@
         return node == ancestor || isDescendantOf(node, ancestor, limitNode);
     }
 
-    krion.dom.isSelfOrDescendantOf = isSelfOrDescendantOf;
+    Rift.dom.isSelfOrDescendantOf = isSelfOrDescendantOf;
 
     /**
      * @param {string} tagName
@@ -247,7 +247,7 @@
         return setElement(document.createElement(tagName), attributes, subnodes);
     }
 
-    krion.dom.createElement = createElement;
+    Rift.dom.createElement = createElement;
 
     /**
      * @param {string} html
@@ -270,7 +270,7 @@
         return el.childNodes.length == 1 && el.firstChild.nodeType == 1 ? el.firstChild : el;
     }
 
-    krion.dom.createElementFromHTML = createElementFromHTML;
+    Rift.dom.createElementFromHTML = createElementFromHTML;
 
     /**
      * @param {HTMLElement} el
@@ -305,7 +305,7 @@
         return el;
     }
 
-    krion.dom.setElement = setElement;
+    Rift.dom.setElement = setElement;
 
     /**
      * @param {Node} node
@@ -321,7 +321,7 @@
         return target;
     }
 
-    krion.dom.moveChildren = moveChildren;
+    Rift.dom.moveChildren = moveChildren;
 
     /**
      * @param {Node} node
@@ -334,7 +334,7 @@
         return node;
     }
 
-    krion.dom.removeNode = removeNode;
+    Rift.dom.removeNode = removeNode;
 
     /**
      * @param {string} url
@@ -357,11 +357,11 @@
         (document.head || document.documentElement).appendChild(script);
     }
 
-    krion.dom.addScript = addScript;
+    Rift.dom.addScript = addScript;
 
     // AJAX utils
 
-    krion.ajax = {};
+    Rift.ajax = {};
 
     /**
      * @param {string} url
@@ -422,12 +422,12 @@
         (document.head || document.documentElement).appendChild(script);
     }
 
-    krion.ajax.jsonp = jsonp;
+    Rift.ajax.jsonp = jsonp;
 
     // Emitter
 
-    var Emitter = krion.Emitter = createClass({
-        __name: 'krion.Emitter',
+    var Emitter = Rift.Emitter = createClass({
+        __name: 'Rift.Emitter',
 
         _events: null,
 
@@ -437,7 +437,7 @@
          * @param {string} type
          * @param {Function} listener
          * @param {Object} [context]
-         * @returns {krion.Emitter}
+         * @returns {Rift.Emitter}
          */
         on: function(type, listener, context) {
             var events = this._events || (this._events = Object.create(null));
@@ -454,7 +454,7 @@
          * @param {string} [type]
          * @param {Function} [listener]
          * @param {Object} [context]
-         * @returns {krion.Emitter}
+         * @returns {Rift.Emitter}
          */
         off: function(type, listener, context) {
             var events = this._events;
@@ -502,7 +502,7 @@
          * @param {string} type
          * @param {Function} listener
          * @param {Object} [context]
-         * @returns {krion.Emitter}
+         * @returns {Rift.Emitter}
          */
         once: function(type, listener, context) {
             function wrapper() {
@@ -517,7 +517,7 @@
         /**
          * @param {string} type
          * @param {*} ...args
-         * @returns {krion.Emitter}
+         * @returns {Rift.Emitter}
          */
         emit: function(type) {
             var events = (this._events || (this._events = Object.create(null)))[type];
@@ -538,7 +538,7 @@
          * @param {string} type
          * @param {Function} listener
          * @param {Object} [context]
-         * @returns {krion.Emitter}
+         * @returns {Rift.Emitter}
          */
         listenTo: function(target, type, listener, context) {
             var listeningTo = this._listeningTo || (this._listeningTo = Object.create(null));
@@ -574,7 +574,7 @@
          * @param {string} type
          * @param {Function} listener
          * @param {Object} [context]
-         * @returns {krion.Emitter}
+         * @returns {Rift.Emitter}
          */
         stopListening: function(target, type, listener, context) {
             var listeningTo = this._listeningTo || (this._listeningTo = Object.create(null));
@@ -607,12 +607,12 @@
 
     if (typeof exports != 'undefined') {
         if (typeof module != 'undefined' && module.exports) {
-            module.exports = krion;
+            module.exports = Rift;
         } else {
-            exports.krion = krion;
+            exports.Rift = Rift;
         }
     } else {
-        window.krion = krion;
+        window.Rift = Rift;
     }
 
 })();
