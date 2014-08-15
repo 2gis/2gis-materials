@@ -1,12 +1,12 @@
 
-var cities;
+var krion = require('./krion/krion');
 
 var materials = {
-    'Дерево': { color: '#b47e4d' },
-    'Кирпич': { color: '#ff6464' },
-    'Панель': { color: '#008965' },
-    'Бетон': { color: '#a04089' },
-    'Металл': { color: '#0088ff' }
+    'Дерево': { color: '#b47e4d', enName: 'wood' },
+    'Кирпич': { color: '#ff6464', enName: 'brick' },
+    'Панель': { color: '#008965', enName: 'panel' },
+    'Бетон': { color: '#a04089', enName: 'concrete' },
+    'Металл': { color: '#0088ff', enName: 'metal' }
 };
 
 var heatmapLayerConf = {
@@ -31,155 +31,344 @@ var heatmapLayerConf = {
     valueField: 'count'
 };
 
-var map;
-var heatmapLayers;
+var MaterialsApp = krion.createClass(krion.Emitter, {
+    __name: 'MaterialsApp',
 
-var sbCity;
-var bMaterials;
-var blMaterialOptions;
-var bColorLegend;
+    _cities: null,
+    _selectedCityTransliteratedName: null,
 
-function loadMaterialData(cityData, callback, options) {
-    cityData.loadingMaterialData = true;
+    _materialDataLoadingEmitter: null,
 
-    return jsonp(
-        'data/cities/materials/' + cityData.transliteratedName + '.jsonp',
-        function(materialData) {
-            cityData.loadingMaterialData = false;
-            cityData.materialData = materialData;
+    _cityListIsShown: false,
 
-            update();
-        },
-        createObject({ callbackName: '_setData' }, options)
-    );
-}
+    _map: null,
 
-function update() {
-    var transliteratedCityName = sbCity.value;
+    _heatmapLayers: null,
 
-    if (!cities.hasOwnProperty(transliteratedCityName)) {
-        return;
-    }
+    element: null,
+    _bMap: null,
+    _tfCity: null,
+    _bMaterials: null,
+    _bcMaterialOptions: null,
+    _bCityList: null,
+    _bcCityListLinks: null,
+    _btnReadMore: null,
 
-    var cityData = cities[transliteratedCityName];
+    _init: function() {
+        krion.bindListeners(this);
 
-    if (cityData.materialData === undefined || cityData.loadingMaterialData) {
-        return;
-    }
+        this.element = document.body;
 
-    Object.keys(cityData.materialData).forEach(function(materialName) {
-        if (!materials.hasOwnProperty(materialName)) {
-            return;
-        }
+        DG.then(function() {
+            this._findBlocks();
 
-        if (!blMaterialOptions[materialName].checked) {
-            map.removeLayer(heatmapLayers[materialName]);
-            return;
-        }
+            this._map = DG.map(this._bMap, {
+                'center': [54.98, 82.89],
+                'zoom': 13
+            });
 
-        map.addLayer(heatmapLayers[materialName]);
+            this._loadScripts(function() {
+                this._createHeatmapLayers();
 
-        var heatmapLayerData = Object.keys(cityData.materialData[materialName]).map(function(id) {
-            var item = this[id];
+                krion.ajax.jsonp('data/cities/index.jsonp', function(cities) {
+                    this._cities = cities.reduce(function(cities, cityData) {
+                        cities[cityData.transliteratedName] = cityData;
+                        return cities;
+                    }, {});
 
-            return {
-                lat: +item[1],
-                lng: +item[0],
-                count: 1
-            };
-        }, cityData.materialData[materialName]);
+                    this._updateTFCityAndBCityList('Novosybyrsk');
+                    this._updateBMaterials();
+                    this._bindListeners();
+                    this._loadMaterialData(this._selectedCityTransliteratedName, this._updateHeatmapLayers);
+                }.bind(this), { callbackName: '_setData' });
+            }.bind(this));
+        }.bind(this));
+    },
 
-        heatmapLayers[materialName].setData({
-            max: 8,
-            data: heatmapLayerData
+    _findBlocks: function() {
+        var el = this.element;
+
+        this._bMap = el.querySelector('[data-name=bMap]');
+        this._tfCity = el.querySelector('[data-name=tfCity]');
+        this._bMaterials = el.querySelector('[data-name=bMaterials]');
+        this._bCityList = el.querySelector('[data-name=bCityList]');
+        this._btnReadMore = el.querySelector('[data-name=btnReadMore]');
+    },
+
+    /**
+     * @param {Function} callback
+     */
+    _loadScripts: function(callback) {
+        krion.dom.addScript('node_modules/heatmap.js/build/heatmap.js', function() {
+            krion.dom.addScript('node_modules/heatmap.js/plugins/leaflet-heatmap.js', function() {
+                callback.call(this);
+            });
         });
-    });
-}
+    },
 
-DG.then(function() {
-    map = DG.map('map', {
-        'center': [54.98, 82.89],
-        'zoom': 13
-    });
-
-    addScript('node_modules/heatmap.js/build/heatmap.js', function() {
-        addScript('node_modules/heatmap.js/plugins/leaflet-heatmap.js', function() {
-            heatmapLayers = Object.keys(materials).reduce(function(heatmapLayers, materialName) {
-                heatmapLayers[materialName] = new HeatmapOverlay(
-                    createObject(heatmapLayerConf, {
-                        gradient: {
-                            0: 'rgba(0,0,0,0)',
-                            1: materials[materialName].color
-                        }
-                    })
-                );
-
-                return heatmapLayers;
-            }, {});
-
-            jsonp('data/cities/index.jsonp', function(cities_) {
-                cities = cities_.reduce(function(cities, cityData) {
-                    cities[cityData.transliteratedName] = cityData;
-                    return cities;
-                }, {});
-
-                sbCity = document.getElementById('sbCity');
-
-                Object.keys(cities).forEach(function(cityTransliteratedName) {
-                    var cityData = cities[cityTransliteratedName];
-
-                    this[this.length] = new Option(cityData.name, cityData.transliteratedName);
-
-                    if (cityData.name == 'Новосибирск') {
-                        sbCity.selectedIndex = this.length - 1;
-
-                        loadMaterialData(cityData);
+    _createHeatmapLayers: function() {
+        this._heatmapLayers = Object.keys(materials).reduce(function(heatmapLayers, materialName) {
+            heatmapLayers[materialName] = new HeatmapOverlay(
+                krion.object.assign(Object.create(heatmapLayerConf), {
+                    gradient: {
+                        0: 'rgba(0,0,0,0)',
+                        1: materials[materialName].color
                     }
-                }, sbCity.options);
+                })
+            );
 
-                bMaterials = document.getElementById('bMaterials');
-                bColorLegend = document.getElementById('bColorLegend');
+            return heatmapLayers;
+        }, {});
+    },
 
-                blMaterialOptions = Object.keys(materials).reduce(function(blMaterialOptions, materialName) {
-                    var label = createElementFromHTML(
-                        '<label><input type="checkbox" checked="checked" /> ' + materialName + '</label>'
-                    );
+    /**
+     * @param {string} [selectedCityTransliteratedName]
+     */
+    _updateTFCityAndBCityList: function(selectedCityTransliteratedName) {
+        var bCityList = this._bCityList;
+        var bcCityListLinks = this._bcCityListLinks = {};
 
-                    blMaterialOptions[materialName] = label.firstChild;
+        Object.keys(this._cities).forEach(function(cityTransliteratedName) {
+            var cityData = this._cities[cityTransliteratedName];
 
-                    bMaterials.appendChild(label);
+            var link = krion.dom.createElementFromHTML(
+                '<a data-transliterated-name="%1" href="#%1">%2</a>',
+                cityTransliteratedName,
+                cityData.name
+            );
 
-                    bColorLegend.insertAdjacentHTML(
-                        'beforeend',
-                        '<dt><span style="background-color: ' + materials[materialName].color + ';"></span></dt><dd>' +
-                            materialName + '</dd>'
-                    );
+            var li = krion.dom.createElement('li', null, [link]);
 
-                    return blMaterialOptions;
-                }, {});
+            bcCityListLinks[cityTransliteratedName] = link;
+            bCityList.appendChild(li);
+        }, this);
 
-                sbCity.onchange = function() {
-                    var transliteratedCityName = sbCity.value;
+        if (selectedCityTransliteratedName) {
+            this._setCityInControlPanel(selectedCityTransliteratedName);
+        }
+    },
 
-                    if (!cities.hasOwnProperty(transliteratedCityName)) {
-                        return;
-                    }
+    /**
+     * @param {string} transliteratedCityName
+     */
+    _setCityInControlPanel: function(transliteratedCityName) {
+        var cityData = this._cities[transliteratedCityName];
 
-                    var cityData = cities[transliteratedCityName];
+        if (this._selectedCityTransliteratedName) {
+            this._tfCity.classList.remove('_city-' + this._selectedCityTransliteratedName);
+            this._bcCityListLinks[this._selectedCityTransliteratedName].classList.remove('_selected');
+        }
 
-                    if (cityData.materialData === undefined) {
-                        loadMaterialData(cityData);
-                    } else {
-                        update();
-                    }
+        this._selectedCityTransliteratedName = transliteratedCityName;
+
+        this._tfCity.classList.add('_city-' + transliteratedCityName);
+        this._tfCity.lastElementChild.innerHTML = cityData.name;
+        this._bcCityListLinks[transliteratedCityName].classList.add('_selected');
+    },
+
+    _updateBMaterials: function() {
+        var bMaterials = this._bMaterials;
+
+        this._bcMaterialOptions = Object.keys(materials).reduce(function(bcMaterialOptions, materialName) {
+            var label = krion.dom.createElementFromHTML(
+                '<label class="chb _material-%1"><input type="checkbox" checked="checked" /><span></span>%2</label>',
+                materials[materialName].enName,
+                materialName
+            );
+
+            bcMaterialOptions[materialName] = label.firstChild;
+            bMaterials.appendChild(label);
+
+            return bcMaterialOptions;
+        }, {});
+    },
+
+    _bindListeners: function() {
+        this.listenTo(this._tfCity, 'click', this._onTFCityClick);
+
+        this.listenTo(this._bCityList, 'click', this._onBCityListClick);
+
+        Object.keys(this._bcMaterialOptions).forEach(function(materialName) {
+            this.listenTo(this._bcMaterialOptions[materialName], 'change', this._onBCMaterialOptionsChange);
+        }, this);
+    },
+
+    /**
+     * @param {MouseEvent} evt
+     */
+    _onTFCityClick: function(evt) {
+        evt.preventDefault();
+
+        this.toogleCityList();
+    },
+
+    /**
+     * @param {MouseEvent} evt
+     */
+    _onBCityListClick: function(evt) {
+        setTimeout(function() {
+            var link;
+            var node = evt.target;
+
+            while (node != this._bCityList) {
+                if (node.tagName == 'A') {
+                    link = node;
+                }
+                node = node.parentNode;
+            }
+
+            if (!link) {
+                return;
+            }
+
+            var transliteratedCityName = link.dataset.transliteratedName;
+
+            this._setCityInControlPanel(transliteratedCityName);
+
+            if (this._cities[transliteratedCityName].materialData === undefined) {
+                this._loadMaterialData(transliteratedCityName, this._updateHeatmapLayers);
+            } else {
+                this._updateHeatmapLayers();
+            }
+
+            this.hideCityList();
+        }.bind(this), 1);
+    },
+
+    _onBCMaterialOptionsChange: function() {
+        setTimeout(function() {
+            this._updateHeatmapLayers();
+        }.bind(this), 1);
+    },
+
+    /**
+     * @param {string} transliteratedCityName
+     * @param {Function} callback
+     */
+    _loadMaterialData: function(transliteratedCityName, callback) {
+        var cityData = this._cities[transliteratedCityName];
+
+        if (cityData.materialData) {
+            callback.call(this);
+            return;
+        }
+
+        var loadingEmitter = this._materialDataLoadingEmitter ||
+            (this._materialDataLoadingEmitter = new krion.Emitter());
+
+        loadingEmitter.once('loaded:' + transliteratedCityName, callback, this);
+
+        if (cityData.loadingMaterialData) {
+            return;
+        }
+
+        cityData.loadingMaterialData = true;
+
+        krion.ajax.jsonp(
+            'data/cities/materials/' + transliteratedCityName + '.jsonp',
+            function(materialData) {
+                cityData.loadingMaterialData = false;
+                cityData.materialData = materialData;
+
+                loadingEmitter.emit('loaded:' + transliteratedCityName);
+            },
+            { callbackName: '_setData' }
+        );
+    },
+
+    _updateHeatmapLayers: function() {
+        var transliteratedCityName = this._selectedCityTransliteratedName;
+
+        if (!this._cities.hasOwnProperty(transliteratedCityName)) {
+            return;
+        }
+
+        var cityData = this._cities[transliteratedCityName];
+
+        if (cityData.materialData === undefined || cityData.loadingMaterialData) {
+            return;
+        }
+
+        var heatmapLayers = this._heatmapLayers;
+
+        Object.keys(cityData.materialData).forEach(function(materialName) {
+            if (!materials.hasOwnProperty(materialName)) {
+                return;
+            }
+
+            if (!this._bcMaterialOptions[materialName].checked) {
+                this._map.removeLayer(heatmapLayers[materialName]);
+                return;
+            }
+
+            this._map.addLayer(heatmapLayers[materialName]);
+
+            var heatmapLayerData = Object.keys(cityData.materialData[materialName]).map(function(id) {
+                var item = this[id];
+
+                return {
+                    lat: +item[1],
+                    lng: +item[0],
+                    count: 1
                 };
+            }, cityData.materialData[materialName]);
 
-                Object.keys(blMaterialOptions).forEach(function(materialName) {
-                    blMaterialOptions[materialName].onchange = function() {
-                        update();
-                    };
-                });
-            }, { callbackName: '_setData' });
-        });
-    });
+            heatmapLayers[materialName].setData({
+                max: 8,
+                data: heatmapLayerData
+            });
+        }, this);
+    },
+
+    /**
+     * @returns {boolean}
+     */
+    showCityList: function() {
+        if (this._cityListIsShown) {
+            return false;
+        }
+
+        this._cityListIsShown = true;
+        this.element.classList.add('_state-cityList');
+
+        return true;
+    },
+
+    /**
+     * @returns {boolean}
+     */
+    hideCityList: function() {
+        if (!this._cityListIsShown) {
+            return false;
+        }
+
+        this._cityListIsShown = false;
+        this.element.classList.remove('_state-cityList');
+
+        return true;
+    },
+
+    /**
+     * @param {boolean} [stateValue]
+     * @returns {boolean}
+     */
+    toogleCityList: function(stateValue) {
+        if (stateValue === undefined) {
+            stateValue = !this._cityListIsShown;
+        }
+
+        if (stateValue) {
+            this.showCityList();
+        } else {
+            this.hideCityList();
+        }
+
+        return stateValue;
+    },
+
+    destroy: function() {
+        this.stopListening();
+    }
 });
+
+window.materialsApp = new MaterialsApp();

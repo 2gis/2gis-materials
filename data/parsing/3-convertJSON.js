@@ -106,6 +106,16 @@ for (var i = 0, l = json.length; i < l; i++) {
 fs.writeFileSync('data/all5.json', JSON.stringify(result), 'utf8');*/
 
 
+/**
+ * @param {string} str
+ * @returns {string}
+ */
+function toCamel(str) {
+    return str.replace(/\W+(\w?)/g, function(match, chr) {
+        return chr.toUpperCase();
+    });
+}
+
 var transliteration = require('transliteration.cyr');
 
 var index = [];
@@ -113,7 +123,7 @@ var index = [];
 var json = JSON.parse(fs.readFileSync('data/parsing/all5.json', 'utf8'));
 
 for (var cityName in json) {
-    var transliteratedCityName = transliteration.transliterate(cityName);
+    var transliteratedCityName = toCamel(transliteration.transliterate(cityName));
 
     index.push({ name: cityName, transliteratedName: transliteratedCityName });
 

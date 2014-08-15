@@ -1,0 +1,105 @@
+
+@import "./vars.less";
+
+.chb,
+.rdb {
+	position: relative;
+	user-select: none;
+}
+
+.chb input,
+.rdb input {
+	position: absolute;
+	z-index: -1;
+	width: 1px;
+	height: 1px;
+	outline: 0;
+	opacity: 0;
+}
+
+.chb input + span,
+.rdb input + span {
+	position: relative;
+	top: 0.15em;
+	width: 1em;
+	height: 1em;
+	margin: 0.5em 0.2em 0 0.6em;
+	border: solid 1px;
+	border-color: hsl(0, 0%, 70%) hsl(0, 0%, 65%) hsl(0, 0%, 60%);
+	border-radius: 2px;
+	display: inline-block;
+	box-shadow: 0 1px 1px hsla(0, 0%, 0%, 0.15), inset 0 1px hsla(0, 0%, 100%, 0.5);
+	cursor: pointer;
+	background-color: hsl(0, 0%, 92%);
+	background-image: linear-gradient(to bottom, white 0, hsl(0, 0%, 84%) 100%);
+}
+
+.rdb input + span {
+	border-color: hsl(0, 0%, 65%) hsl(0, 0%, 60%) hsl(0, 0%, 55%);
+	border-radius: 50%;
+}
+
+.chb:hover input:enabled + span {
+	border-color: hsl(0, 0%, 55%) hsl(0, 0%, 50%) hsl(0, 0%, 45%);
+}
+
+.rdb:hover input:enabled + span {
+	border-color: hsl(0, 0%, 50%) hsl(0, 0%, 45%) hsl(0, 0%, 40%);
+}
+
+.chb input:focus + span,
+.rdb input:focus + span {
+	border-color: @ceres-color_blue;
+}
+
+.chb input:disabled + span,
+.rdb input:disabled + span {
+	box-shadow: none;
+	cursor: default;
+	opacity: 0.65;
+	background-color: hsl(0, 0%, 84%);
+	background-image: none;
+}
+
+.chb input + span:after,
+.rdb input + span:after {
+	position: absolute;
+	left: 3px;
+	top: 3px;
+	right: 3px;
+	bottom: 3px;
+	border-radius: 2px;
+	content: '';
+}
+
+.rdb input + span:after {
+	border-radius: 50%;
+}
+
+.chb:hover input:enabled + span:after,
+.rdb:hover input:enabled + span:after {
+	background-color: hsl(0, 0%, 75%);
+}
+
+.chb input:checked + span:after,
+.rdb input:checked + span:after,
+.chb:hover input:checked + span:after,
+.rdb:hover input:checked + span:after {
+	background-color: hsl(0, 0%, 20%);
+}
+
+html.touch .chb:after,
+html.touch .rdb:after {
+	position: absolute;
+	left: 0;
+	top: -10px;
+	right: 0;
+	bottom: -10px;
+	content: '';
+}
+
+html.touch.debug .chb:after,
+html.touch.debug .rdb:after {
+	opacity: 0.25;
+	background: red;
+}

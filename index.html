@@ -4,30 +4,32 @@
         <meta charset="utf-8" />
         <title>API карт 2ГИС</title>
 
-        <link rel="stylesheet" type="text/css" href="styles/reset.css" />
-        <link rel="stylesheet" type="text/css" href="styles/typography.css" />
-        <link rel="stylesheet" type="text/css" href="styles/forms.css" />
-
-        <link rel="stylesheet" type="text/css" href="styles/app.css" />
+        <link rel="stylesheet" type="text/css" href="build/styles/all.min.css" />
 
         <script src="http://maps.api.2gis.ru/2.0/loader.js?pkg=full" data-id="dgLoader"></script>
-
-        <script src="scripts/lib.js"></script>
-
-        <script src="scripts/app.js"></script>
     </head>
     <body>
-        <div id="mapWrap">
-            <div id="map" style="width: 500px; height: 400px;"></div>
-            <dl id="bColorLegend"></dl>
+        <div data-name="bMap" class="map"></div>
+
+        <div class="header">
+            <a href="http://2gis.ru/" class="header__logo"></a>
+            <h1 class="header__title">Из чего построен город</h1>
         </div>
 
-        <form>
-            <select id="sbCity"></select>
+        <div class="controlPanel">
+            <a data-name="tfCity" href="#selectCity" class="controlPanel__city">
+                <span class="controlPanel__cityLogo"></span>
+                <span class="controlPanel__cityName"></span>
+            </a>
 
-            <fieldset id="bMaterials">
-                <legend>Материал строения</legend>
-            </fieldset>
-        </form>
+            <div class="controlPanel__mainContent">
+                <div data-name="bMaterials" class="controlPanel__materials"></div>
+                <ul data-name="bCityList" class="controlPanel__cityList"></ul>
+            </div>
+
+            <a data-name="btnReadMore" class="controlPanel_readMore" href="#readMore">Подробнее</a>
+        </div>
+
+        <script src="build/scripts/all.js"></script>
     </body>
 </html>

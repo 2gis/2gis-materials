@@ -1,0 +1,271 @@
+
+@import "./ceres/base.less";
+@import "./ceres/checkbox.less";
+
+@font-face {
+    font-family: "SuisseCond";
+    src: url("../fonts/SuisseIntl-Cond.eot");
+    src: url("../fonts/SuisseIntl-Cond.eot?#iefix") format("embedded-opentype"),
+         url("../fonts/SuisseIntl-Cond.woff") format("woff"),
+         url("../fonts/SuisseIntl-Cond.svg#suisse_intlcondensed") format("svg");
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: "SuisseCondBold";
+    src: url("../fonts/SuisseIntl-CondBold.eot");
+    src: url("../fonts/SuisseIntl-CondBold.eot?#iefix") format("embedded-opentype"),
+         url("../fonts/SuisseIntl-CondBold.woff") format("woff"),
+         url("../fonts/SuisseIntl-CondBold.svg") format("svg");
+    font-weight: bold;
+    font-style: normal;
+}
+
+body {
+    /*font: 15px/20px Helvetica, Arial, sans-serif;*/
+    font: 16px/20px SuisseCond, "Arial Narrow", Helvetica, Arial, sans-serif;
+    -webkit-font-smoothing: antialiased;
+}
+
+.leaflet-zoom-hide {
+    position: absolute !important;
+    top: 0;
+    left: 0;
+}
+
+.leaflet-control-container .leaflet-top.leaflet-left,
+.leaflet-control-container .leaflet-top.leaflet-right {
+    display: none;
+}
+
+.map {
+    width: 100%;
+    height: 100%;
+}
+
+.header,
+.controlPanel {
+    position: absolute;
+    left: 26px;
+    width: 476px;
+    border-radius: 3px;
+    background-color: rgba(34, 34, 34, 0.9);
+    color: white;
+}
+
+.header {
+    top: 29px;
+    height: 70px;
+}
+
+.header__logo {
+    position: absolute;
+    top: 18px;
+    left: 20px;
+    width: 93px;
+    height: 38px;
+    background-image: url("../images/logo.png");
+    background-repeat: no-repeat;
+}
+
+.header__title {
+    position: absolute;
+    top: 0;
+    right: 0;
+    left: 138px;
+    border-left: 1px solid #71706e;
+    text-align: center;
+    font-size: 32px;
+    line-height: 70px;
+}
+
+.controlPanel {
+    top: 106px;
+}
+
+.controlPanel__city {
+    padding: 15px 22px 0;
+    display: block;
+    color: white;
+    text-decoration: none;
+    font-size: 32px;
+    line-height: 40px;
+}
+
+.controlPanel__city:hover {
+    background-image: none;
+    color: #ffc84b;
+}
+
+.controlPanel__cityLogo {
+    width: 28px;
+    height: 28px;
+    display: inline-block;
+    background-position: 50% 50%;
+    background-repeat: no-repeat;
+}
+
+.controlPanel__city._city-Volgograd .controlPanel__cityLogo {
+    background-image: url("../images/cities/logo_volgograd.svg");
+}
+.controlPanel__city._city-Voronezh .controlPanel__cityLogo {
+    background-image: url("../images/cities/logo_voronezh.svg");
+}
+.controlPanel__city._city-Ekaterynburg .controlPanel__cityLogo {
+    background-image: url("../images/cities/logo_ekaterinburg.svg");
+}
+.controlPanel__city._city-Kazan .controlPanel__cityLogo {
+    background-image: url("../images/cities/logo_kazan.svg");
+}
+.controlPanel__city._city-Krasnoiarsk .controlPanel__cityLogo {
+    background-image: url("../images/cities/logo_krasnoyarsk.svg");
+}
+.controlPanel__city._city-Moskva .controlPanel__cityLogo {
+    background-image: url("../images/cities/logo_moscow.svg");
+}
+.controlPanel__city._city-NyzhnyiNovgorod .controlPanel__cityLogo {
+    background-image: url("../images/cities/logo_n_novgorod.svg");
+}
+.controlPanel__city._city-Novosybyrsk .controlPanel__cityLogo {
+    background-image: url("../images/cities/logo_novosibirsk.svg");
+}
+.controlPanel__city._city-Omsk .controlPanel__cityLogo {
+    background-image: url("../images/cities/logo_omsk.svg");
+}
+.controlPanel__city._city-Perm .controlPanel__cityLogo {
+    background-image: url("../images/cities/logo_perm.svg");
+}
+.controlPanel__city._city-RostovNaDonu .controlPanel__cityLogo {
+    background-image: url("../images/cities/logo_rostov.svg");
+}
+.controlPanel__city._city-Samara .controlPanel__cityLogo {
+    background-image: url("../images/cities/logo_samara.svg");
+}
+.controlPanel__city._city-SanktPeterburg .controlPanel__cityLogo {
+    background-image: url("../images/cities/logo_spb.svg");
+}
+.controlPanel__city._city-Ufa .controlPanel__cityLogo {
+    background-image: url("../images/cities/logo_ufa.svg");
+}
+.controlPanel__city._city-Cheliabynsk .controlPanel__cityLogo {
+    background-image: url("../images/cities/logo_chelyabinsk.svg");
+}
+
+.controlPanel__cityName {
+    background-image: linear-gradient(to right, hsla(0, 0%, 65%, 0.8), hsla(0, 0%, 65%, 0.1));
+    background-position: 0 95%;
+    background-size: 2px 1px;
+    background-repeat: repeat-x;
+}
+
+.controlPanel__mainContent {
+}
+
+.controlPanel__materials {
+    height: 60px;
+    margin: 0;
+    padding: 0 22px;
+    border: 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.controlPanel__materials .chb input + span {
+    margin-top: 0;
+    margin-left: 0;
+    border-color: hsl(0, 0%, 65%);
+    border-radius: 50%;
+    box-shadow: inset 0 0 1px hsl(0, 0%, 65%), inset 0 0 1px 2px hsla(0, 0%, 65%, 0.4);
+    background-color: black;
+    background-image: none;
+}
+
+.controlPanel__materials .chb:hover input:enabled + span {
+    border-color: hsl(0, 0%, 80%);
+}
+
+.controlPanel__materials .chb input + span:after {
+    border-radius: 50%;
+    opacity: 0;
+}
+
+.controlPanel__materials .chb._material-wood input:enabled + span:after {
+    background-color: #b47e4d;
+}
+
+.controlPanel__materials .chb._material-brick input:enabled + span:after {
+    background-color: #ff6464;
+}
+
+.controlPanel__materials .chb._material-panel input:enabled + span:after {
+    background-color: #008965;
+}
+
+.controlPanel__materials .chb._material-concrete input:enabled + span:after {
+    background-color: #a04089;
+}
+
+.controlPanel__materials .chb._material-metal input:enabled + span:after {
+    background-color: #0088ff;
+}
+
+.controlPanel__materials .chb:hover input:enabled + span:after {
+    opacity: 0.75;
+}
+
+.controlPanel__materials .chb input:checked + span:after,
+.controlPanel__materials .chb:hover input:checked + span:after {
+    opacity: 1;
+}
+
+._state-cityList .controlPanel__materials {
+    display: none;
+}
+
+.controlPanel__cityList {
+    margin: 0;
+    padding: 10px 0;
+    display: none;
+    list-style: none;
+}
+
+.controlPanel__cityList a {
+    margin: 3px 19px;
+    display: inline-block;
+    background-image: linear-gradient(to right, hsla(0, 0%, 65%, 0.8), hsla(0, 0%, 65%, 0.1));
+    background-position: 0 95%;
+    background-size: 2px 1px;
+    background-repeat: repeat-x;
+    color: white;
+    text-decoration: none;
+}
+
+.controlPanel__cityList a:hover {
+    background-image: none;
+    color: #ffc84b;
+}
+
+._state-cityList .controlPanel__cityList {
+    display: block;
+}
+
+.controlPanel_readMore {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background-image: linear-gradient(to right, rgba(170, 170, 170, 0.5), rgba(170, 170, 170, 0.5));
+    background-position: 0 100%;
+    background-size: 2px 1px;
+    background-repeat: repeat-x;
+    color: #aaa;
+    text-decoration: none;
+    font-size: 12px;
+    line-height: 14px;
+}
+
+.controlPanel_readMore:hover {
+    background-image: none;
+    color: #ffc84b;
+}

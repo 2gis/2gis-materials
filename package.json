@@ -4,11 +4,20 @@
   "description": "Heatmaps plugin demo",
   "main": "index.js",
   "dependencies": {
-    "heatmap.js": "git://github.com/2gis/heatmap.js#develop",
+    "heatmap.js": "git://github.com/2gis/heatmap.js#develop"
+  },
+  "devDependencies": {
+    "gulp": "^3.8.7",
+    "gulp-browserify": "^0.5.0",
+    "gulp-concat": "^2.3.4",
+    "gulp-cssmin": "^0.1.6",
+    "gulp-less": "^1.3.3",
+    "gulp-rename": "^1.2.0",
+    "gulp-rewrite-css": "0.0.1",
+    "gulp-uglify": "^0.3.1",
     "node-csv-json": "^0.2.1",
     "transliteration.cyr": "^1.0.4"
   },
-  "devDependencies": {},
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },

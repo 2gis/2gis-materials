@@ -1,0 +1,621 @@
+html,
+body,
+div,
+section,
+header,
+footer,
+nav,
+article,
+aside,
+figure,
+figcaption,
+img,
+hgroup,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+a,
+span,
+em,
+strong,
+dfn,
+abbr,
+address,
+time,
+blockquote,
+q,
+cite,
+ruby,
+rt,
+rp,
+kbd,
+mark,
+ins,
+del,
+code,
+var,
+samp,
+output,
+pre,
+details,
+summary,
+menu,
+command,
+ul,
+ol,
+li,
+dl,
+dt,
+dd,
+table,
+caption,
+thead,
+tfoot,
+tbody,
+th,
+tr,
+td,
+form,
+fieldset,
+legend,
+label,
+input,
+textarea,
+select,
+button,
+object,
+embed,
+audio,
+video,
+canvas,
+iframe {
+  margin: 0;
+  outline-color: #14b822;
+  padding: 0;
+  vertical-align: baseline;
+  font-style: inherit;
+  font-weight: inherit;
+  font-size: 1em;
+  font-family: inherit;
+}
+html,
+body {
+  height: 100%;
+}
+body {
+  background: white;
+  color: black;
+  line-height: 1.5;
+  /* http://www.slideshare.net/maxdesign/line-height */
+}
+img,
+abbr,
+fieldset {
+  border: 0;
+}
+blockquote,
+q {
+  quotes: none;
+}
+blockquote:before,
+blockquote:after,
+q:before,
+q:after {
+  content: '';
+  content: none;
+}
+ul,
+ol {
+  list-style: none;
+}
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+caption,
+th {
+  text-align: left;
+}
+th,
+td {
+  vertical-align: middle;
+}
+input::-moz-focus-inner,
+button::-moz-focus-inner {
+  border: 0;
+  padding: 0;
+}
+body {
+  color: #333333;
+  font-size: 15px;
+  font-family: Verdana, Geneva, sans-serif;
+}
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  margin-bottom: 1em;
+  line-height: 1;
+}
+h1 {
+  font-size: 1.8em;
+}
+h2 {
+  font-size: 1.7em;
+}
+h3 {
+  font-size: 1.5em;
+}
+h4 {
+  font-size: 1.3em;
+}
+h5 {
+  font-weight: 600;
+  font-size: 1.1em;
+}
+h6 {
+  margin-bottom: 0.5em;
+  font-weight: 600;
+}
+p {
+  margin-bottom: 1.5em;
+}
+a {
+  color: #0044cc;
+  text-decoration: underline;
+}
+em,
+dfn {
+  font-style: italic;
+}
+strong,
+dfn {
+  font-weight: bold;
+}
+abbr {
+  border-bottom: dashed 1px #666666;
+}
+address {
+  margin-bottom: 1.5em;
+  font-style: italic;
+}
+blockquote {
+  margin: 1.5em;
+  color: #666666;
+  font-style: italic;
+}
+code,
+pre {
+  font-family: 'Courier New', Courier, monospace;
+}
+pre {
+  margin: 1.5em 0;
+  white-space: pre;
+}
+sub,
+sup {
+  line-height: 0;
+}
+hr {
+  height: 0;
+  margin: 0.5em 0 1em;
+  border: dashed #a6a6a6;
+  border-width: 1px 0 0;
+  clear: both;
+}
+ul,
+ol {
+  margin: 0 1.5em 1.5em 0;
+  padding-left: 1.5em;
+}
+li ul,
+li ol {
+  margin: 0;
+}
+ul {
+  list-style-type: disc;
+}
+ol {
+  list-style-type: decimal;
+}
+dl {
+  margin-bottom: 1.5em;
+}
+dt {
+  font-weight: bold;
+}
+dd {
+  margin: 0 0 1em 1.5em;
+}
+tfoot {
+  font-style: italic;
+}
+th {
+  font-weight: bold;
+}
+fieldset {
+  margin-bottom: 1.5em;
+  border: solid 1px #cccccc;
+  padding: 1.4em;
+}
+legend {
+  padding: 0 2px;
+  font-weight: bold;
+  font-size: 1.2em;
+}
+input[type=text],
+input[type=password],
+input[type=url],
+input[type=email],
+input[type=number],
+textarea,
+select {
+  width: 400px;
+  border: solid 1px #a6a6a6;
+  padding: 0.3em 0.4em;
+  box-sizing: border-box;
+  box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.15);
+}
+input[type=text]:focus,
+input[type=password]:focus,
+input[type=url]:focus,
+input[type=email]:focus,
+input[type=number]:focus,
+textarea:focus,
+select:focus {
+  outline: none;
+  border-color: #4785ff;
+}
+textarea {
+  height: 10em;
+}
+select {
+  padding: 1px 1px 1px 0;
+}
+p input[type=text],
+p input[type=password],
+p input[type=url],
+p input[type=email],
+p input[type=number],
+p textarea,
+p select {
+  margin: 0.1em 0 -0.1em;
+  display: block;
+}
+.nowrap {
+  white-space: nowrap;
+}
+.last {
+  margin-bottom: 0 !important;
+}
+/* http://markup.by/2011/12/06/new-clearfix */
+.clearfix:before,
+.clearfix:after {
+  display: table;
+  content: '';
+}
+.clearfix:after {
+  clear: both;
+}
+.chb,
+.rdb {
+  position: relative;
+  user-select: none;
+}
+.chb input,
+.rdb input {
+  position: absolute;
+  z-index: -1;
+  width: 1px;
+  height: 1px;
+  outline: 0;
+  opacity: 0;
+}
+.chb input + span,
+.rdb input + span {
+  position: relative;
+  top: 0.15em;
+  width: 1em;
+  height: 1em;
+  margin: 0.5em 0.2em 0 0.6em;
+  border: solid 1px;
+  border-color: #b3b3b3 #a6a6a6 #999999;
+  border-radius: 2px;
+  display: inline-block;
+  box-shadow: 0 1px 1px rgba(0, 0, 0, 0.15), inset 0 1px rgba(255, 255, 255, 0.5);
+  cursor: pointer;
+  background-color: #ebebeb;
+  background-image: linear-gradient(to bottom, #ffffff 0, #d6d6d6 100%);
+}
+.rdb input + span {
+  border-color: #a6a6a6 #999999 #8c8c8c;
+  border-radius: 50%;
+}
+.chb:hover input:enabled + span {
+  border-color: #8c8c8c #808080 #737373;
+}
+.rdb:hover input:enabled + span {
+  border-color: #808080 #737373 #666666;
+}
+.chb input:focus + span,
+.rdb input:focus + span {
+  border-color: #4785ff;
+}
+.chb input:disabled + span,
+.rdb input:disabled + span {
+  box-shadow: none;
+  cursor: default;
+  opacity: 0.65;
+  background-color: #d6d6d6;
+  background-image: none;
+}
+.chb input + span:after,
+.rdb input + span:after {
+  position: absolute;
+  left: 3px;
+  top: 3px;
+  right: 3px;
+  bottom: 3px;
+  border-radius: 2px;
+  content: '';
+}
+.rdb input + span:after {
+  border-radius: 50%;
+}
+.chb:hover input:enabled + span:after,
+.rdb:hover input:enabled + span:after {
+  background-color: #bfbfbf;
+}
+.chb input:checked + span:after,
+.rdb input:checked + span:after,
+.chb:hover input:checked + span:after,
+.rdb:hover input:checked + span:after {
+  background-color: #333333;
+}
+html.touch .chb:after,
+html.touch .rdb:after {
+  position: absolute;
+  left: 0;
+  top: -10px;
+  right: 0;
+  bottom: -10px;
+  content: '';
+}
+html.touch.debug .chb:after,
+html.touch.debug .rdb:after {
+  opacity: 0.25;
+  background: red;
+}
+@font-face {
+  font-family: "SuisseCond";
+  src: url("../../fonts/SuisseIntl-Cond.eot");
+  src: url("../../fonts/SuisseIntl-Cond.eot?#iefix") format("embedded-opentype"), url("../../fonts/SuisseIntl-Cond.woff") format("woff"), url("../../fonts/SuisseIntl-Cond.svg#suisse_intlcondensed") format("svg");
+  font-weight: normal;
+  font-style: normal;
+}
+@font-face {
+  font-family: "SuisseCondBold";
+  src: url("../../fonts/SuisseIntl-CondBold.eot");
+  src: url("../../fonts/SuisseIntl-CondBold.eot?#iefix") format("embedded-opentype"), url("../../fonts/SuisseIntl-CondBold.woff") format("woff"), url("../../fonts/SuisseIntl-CondBold.svg") format("svg");
+  font-weight: bold;
+  font-style: normal;
+}
+body {
+  /*font: 15px/20px Helvetica, Arial, sans-serif;*/
+  font: 16px/20px SuisseCond, "Arial Narrow", Helvetica, Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+.leaflet-zoom-hide {
+  position: absolute !important;
+  top: 0;
+  left: 0;
+}
+.leaflet-control-container .leaflet-top.leaflet-left,
+.leaflet-control-container .leaflet-top.leaflet-right {
+  display: none;
+}
+.map {
+  width: 100%;
+  height: 100%;
+}
+.header,
+.controlPanel {
+  position: absolute;
+  left: 26px;
+  width: 476px;
+  border-radius: 3px;
+  background-color: rgba(34, 34, 34, 0.9);
+  color: white;
+}
+.header {
+  top: 29px;
+  height: 70px;
+}
+.header__logo {
+  position: absolute;
+  top: 18px;
+  left: 20px;
+  width: 93px;
+  height: 38px;
+  background-image: url("../../images/logo.png");
+  background-repeat: no-repeat;
+}
+.header__title {
+  position: absolute;
+  top: 0;
+  right: 0;
+  left: 138px;
+  border-left: 1px solid #71706e;
+  text-align: center;
+  font-size: 32px;
+  line-height: 70px;
+}
+.controlPanel {
+  top: 106px;
+}
+.controlPanel__city {
+  padding: 15px 22px 0;
+  display: block;
+  color: white;
+  text-decoration: none;
+  font-size: 32px;
+  line-height: 40px;
+}
+.controlPanel__city:hover {
+  background-image: none;
+  color: #ffc84b;
+}
+.controlPanel__cityLogo {
+  width: 28px;
+  height: 28px;
+  display: inline-block;
+  background-position: 50% 50%;
+  background-repeat: no-repeat;
+}
+.controlPanel__city._city-Volgograd .controlPanel__cityLogo {
+  background-image: url("../../images/cities/logo_volgograd.svg");
+}
+.controlPanel__city._city-Voronezh .controlPanel__cityLogo {
+  background-image: url("../../images/cities/logo_voronezh.svg");
+}
+.controlPanel__city._city-Ekaterynburg .controlPanel__cityLogo {
+  background-image: url("../../images/cities/logo_ekaterinburg.svg");
+}
+.controlPanel__city._city-Kazan .controlPanel__cityLogo {
+  background-image: url("../../images/cities/logo_kazan.svg");
+}
+.controlPanel__city._city-Krasnoiarsk .controlPanel__cityLogo {
+  background-image: url("../../images/cities/logo_krasnoyarsk.svg");
+}
+.controlPanel__city._city-Moskva .controlPanel__cityLogo {
+  background-image: url("../../images/cities/logo_moscow.svg");
+}
+.controlPanel__city._city-NyzhnyiNovgorod .controlPanel__cityLogo {
+  background-image: url("../../images/cities/logo_n_novgorod.svg");
+}
+.controlPanel__city._city-Novosybyrsk .controlPanel__cityLogo {
+  background-image: url("../../images/cities/logo_novosibirsk.svg");
+}
+.controlPanel__city._city-Omsk .controlPanel__cityLogo {
+  background-image: url("../../images/cities/logo_omsk.svg");
+}
+.controlPanel__city._city-Perm .controlPanel__cityLogo {
+  background-image: url("../../images/cities/logo_perm.svg");
+}
+.controlPanel__city._city-RostovNaDonu .controlPanel__cityLogo {
+  background-image: url("../../images/cities/logo_rostov.svg");
+}
+.controlPanel__city._city-Samara .controlPanel__cityLogo {
+  background-image: url("../../images/cities/logo_samara.svg");
+}
+.controlPanel__city._city-SanktPeterburg .controlPanel__cityLogo {
+  background-image: url("../../images/cities/logo_spb.svg");
+}
+.controlPanel__city._city-Ufa .controlPanel__cityLogo {
+  background-image: url("../../images/cities/logo_ufa.svg");
+}
+.controlPanel__city._city-Cheliabynsk .controlPanel__cityLogo {
+  background-image: url("../../images/cities/logo_chelyabinsk.svg");
+}
+.controlPanel__cityName {
+  background-image: linear-gradient(to right, rgba(166, 166, 166, 0.8), rgba(166, 166, 166, 0.1));
+  background-position: 0 95%;
+  background-size: 2px 1px;
+  background-repeat: repeat-x;
+}
+.controlPanel__materials {
+  height: 60px;
+  margin: 0;
+  padding: 0 22px;
+  border: 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.controlPanel__materials .chb input + span {
+  margin-top: 0;
+  margin-left: 0;
+  border-color: #a6a6a6;
+  border-radius: 50%;
+  box-shadow: inset 0 0 1px #a6a6a6, inset 0 0 1px 2px rgba(166, 166, 166, 0.4);
+  background-color: black;
+  background-image: none;
+}
+.controlPanel__materials .chb:hover input:enabled + span {
+  border-color: #cccccc;
+}
+.controlPanel__materials .chb input + span:after {
+  border-radius: 50%;
+  opacity: 0;
+}
+.controlPanel__materials .chb._material-wood input:enabled + span:after {
+  background-color: #b47e4d;
+}
+.controlPanel__materials .chb._material-brick input:enabled + span:after {
+  background-color: #ff6464;
+}
+.controlPanel__materials .chb._material-panel input:enabled + span:after {
+  background-color: #008965;
+}
+.controlPanel__materials .chb._material-concrete input:enabled + span:after {
+  background-color: #a04089;
+}
+.controlPanel__materials .chb._material-metal input:enabled + span:after {
+  background-color: #0088ff;
+}
+.controlPanel__materials .chb:hover input:enabled + span:after {
+  opacity: 0.75;
+}
+.controlPanel__materials .chb input:checked + span:after,
+.controlPanel__materials .chb:hover input:checked + span:after {
+  opacity: 1;
+}
+._state-cityList .controlPanel__materials {
+  display: none;
+}
+.controlPanel__cityList {
+  margin: 0;
+  padding: 10px 0;
+  display: none;
+  list-style: none;
+}
+.controlPanel__cityList a {
+  margin: 3px 19px;
+  display: inline-block;
+  background-image: linear-gradient(to right, rgba(166, 166, 166, 0.8), rgba(166, 166, 166, 0.1));
+  background-position: 0 95%;
+  background-size: 2px 1px;
+  background-repeat: repeat-x;
+  color: white;
+  text-decoration: none;
+}
+.controlPanel__cityList a:hover {
+  background-image: none;
+  color: #ffc84b;
+}
+._state-cityList .controlPanel__cityList {
+  display: block;
+}
+.controlPanel_readMore {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background-image: linear-gradient(to right, rgba(170, 170, 170, 0.5), rgba(170, 170, 170, 0.5));
+  background-position: 0 100%;
+  background-size: 2px 1px;
+  background-repeat: repeat-x;
+  color: #aaa;
+  text-decoration: none;
+  font-size: 12px;
+  line-height: 14px;
+}
+.controlPanel_readMore:hover {
+  background-image: none;
+  color: #ffc84b;
+}
