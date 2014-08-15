@@ -1,0 +1,308 @@
+
+@import "../styles/ceres/base.less";
+@import "../styles/ceres/checkbox.less";
+
+@font-face {
+    font-family: "SuisseCond";
+    src: url("../fonts/SuisseIntl-Cond.eot");
+    src: url("../fonts/SuisseIntl-Cond.eot?#iefix") format("embedded-opentype"),
+         url("../fonts/SuisseIntl-Cond.woff") format("woff"),
+         url("../fonts/SuisseIntl-Cond.svg#suisse_intlcondensed") format("svg");
+    font-weight: normal;
+    font-style: normal;
+}
+
+body {
+    font: 16px/20px SuisseCond, "Arial Narrow", Helvetica, Arial, sans-serif;
+    -webkit-font-smoothing: antialiased;
+}
+
+.leaflet-zoom-hide {
+    position: absolute !important;
+    top: 0;
+    left: 0;
+}
+
+.leaflet-control-container .leaflet-top.leaflet-left,
+.leaflet-control-container .leaflet-top.leaflet-right {
+    display: none;
+}
+
+.map {
+    width: 100%;
+    height: 100%;
+}
+
+.header,
+.controlPanel,
+.footer {
+    position: absolute;
+    left: 26px;
+    border-radius: 3px;
+    background-color: rgba(34, 34, 34, 0.9);
+    color: white;
+}
+
+.header,
+.controlPanel {
+    width: 476px;
+}
+
+.header {
+    top: 29px;
+    height: 70px;
+
+    &__logo {
+        position: absolute;
+        top: 18px;
+        left: 20px;
+        width: 93px;
+        height: 38px;
+        background-image: url("../images/logo.png");
+        background-repeat: no-repeat;
+    }
+
+    &__title {
+        position: absolute;
+        top: 0;
+        right: 0;
+        left: 138px;
+        border-left: 1px solid #71706e;
+        text-align: center;
+        font-size: 32px;
+        line-height: 70px;
+    }
+}
+
+.controlPanel {
+    top: 106px;
+
+    &__city {
+        padding: 15px 22px 0;
+        display: inline-block;
+        color: white;
+        text-decoration: none;
+        font-size: 32px;
+        line-height: 40px;
+
+        &:hover {
+            background-image: none;
+            color: #ffc84b;
+        }
+    }
+
+    &__cityLogo {
+        width: 28px;
+        height: 28px;
+        display: inline-block;
+        background-position: 50% 50%;
+        background-repeat: no-repeat;
+    }
+
+    &__city._city-Volgograd &__cityLogo {
+        background-image: url("../images/cities/logo_volgograd.svg");
+    }
+    &__city._city-Voronezh &__cityLogo {
+        background-image: url("../images/cities/logo_voronezh.svg");
+    }
+    &__city._city-Ekaterinburg &__cityLogo {
+        background-image: url("../images/cities/logo_ekaterinburg.svg");
+    }
+    &__city._city-Kazan &__cityLogo {
+        background-image: url("../images/cities/logo_kazan.svg");
+    }
+    &__city._city-Krasnoyarsk &__cityLogo {
+        background-image: url("../images/cities/logo_krasnoyarsk.svg");
+    }
+    &__city._city-Moscow &__cityLogo {
+        background-image: url("../images/cities/logo_moscow.svg");
+    }
+    &__city._city-NizhniyNovgorod &__cityLogo {
+        background-image: url("../images/cities/logo_n_novgorod.svg");
+    }
+    &__city._city-Novosibirsk &__cityLogo {
+        background-image: url("../images/cities/logo_novosibirsk.svg");
+    }
+    &__city._city-Omsk &__cityLogo {
+        background-image: url("../images/cities/logo_omsk.svg");
+    }
+    &__city._city-Perm &__cityLogo {
+        background-image: url("../images/cities/logo_perm.svg");
+    }
+    &__city._city-RostovNaDonu &__cityLogo {
+        background-image: url("../images/cities/logo_rostov.svg");
+    }
+    &__city._city-Samara &__cityLogo {
+        background-image: url("../images/cities/logo_samara.svg");
+    }
+    &__city._city-SaintPetersburg &__cityLogo {
+        background-image: url("../images/cities/logo_spb.svg");
+    }
+    &__city._city-Ufa &__cityLogo {
+        background-image: url("../images/cities/logo_ufa.svg");
+    }
+    &__city._city-Chelyabinsk &__cityLogo {
+        background-image: url("../images/cities/logo_chelyabinsk.svg");
+    }
+
+    &__cityName {
+        background-image: linear-gradient(to right, hsla(0, 0%, 65%, 0.8), hsla(0, 0%, 65%, 0.1));
+        background-position: 0 95%;
+        background-size: 2px 1px;
+        background-repeat: repeat-x;
+    }
+
+    &__mainContent {
+    }
+
+    &__materials {
+        height: 60px;
+        margin: 0;
+        padding: 0 22px;
+        border: 0;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    &__materials .chb {
+        position: relative;
+
+        &:before {
+            position: absolute;
+            left: 50%;
+            bottom: 24px;
+            width: 58px;
+            margin-left: -24px;
+            border: 1px solid hsla(42, 100%, 65%, 80%);
+            display: none;
+            background: hsla(0, 0%, 0%, 60%);
+            color: white;
+            text-align: center;
+            font-size: 0.9em;
+            line-height: 24px;
+            content: attr(data-percent);
+        }
+
+        &:hover:before {
+            display: block;
+        }
+    }
+
+    &__materials .chb input + span {
+        margin-top: 0;
+        margin-left: 0;
+        border-color: hsl(0, 0%, 65%);
+        border-radius: 50%;
+        box-shadow: inset 0 0 1px hsl(0, 0%, 65%), inset 0 0 1px 2px hsla(0, 0%, 65%, 0.4);
+        background-color: black;
+        background-image: none;
+    }
+
+    &__materials .chb:hover input:enabled + span {
+        border-color: hsl(0, 0%, 80%);
+    }
+
+    &__materials .chb input + span:after {
+        border-radius: 50%;
+        opacity: 0;
+    }
+
+    &__materials .chb._material-wood input:enabled + span:after {
+        background-color: #b47e4d;
+    }
+
+    &__materials .chb._material-brick input:enabled + span:after {
+        background-color: #ff6464;
+    }
+
+    &__materials .chb._material-panel input:enabled + span:after {
+        background-color: #008965;
+    }
+
+    &__materials .chb._material-concrete input:enabled + span:after {
+        background-color: #a04089;
+    }
+
+    &__materials .chb._material-metal input:enabled + span:after {
+        background-color: #0088ff;
+    }
+
+    &__materials .chb:hover input:enabled + span:after {
+        opacity: 0.75;
+    }
+
+    &__materials .chb input:checked + span:after,
+    &__materials .chb:hover input:checked + span:after {
+        opacity: 1;
+    }
+
+    ._state-cityList &__materials {
+        display: none;
+    }
+
+    &__cityList {
+        margin: 0;
+        padding: 10px 0;
+        display: none;
+        list-style: none;
+    }
+
+    &__cityList a {
+        margin: 3px 19px;
+        display: inline-block;
+        background-image: linear-gradient(to right, hsla(0, 0%, 65%, 0.8), hsla(0, 0%, 65%, 0.1));
+        background-position: 0 95%;
+        background-size: 2px 1px;
+        background-repeat: repeat-x;
+        color: white;
+        text-decoration: none;
+    }
+
+    &__cityList a:hover {
+        background-image: none;
+        color: #ffc84b;
+    }
+
+    ._state-cityList &__cityList {
+        display: block;
+    }
+
+    &_readMore {
+        position: absolute;
+        top: 10px;
+        right: 10px;
+        background-image: linear-gradient(to right, rgba(170, 170, 170, 0.5), rgba(170, 170, 170, 0.5));
+        background-position: 0 100%;
+        background-size: 2px 1px;
+        background-repeat: repeat-x;
+        color: #aaa;
+        text-decoration: none;
+        font-size: 12px;
+        line-height: 14px;
+    }
+
+    &_readMore:hover {
+        background-image: none;
+        color: #ffc84b;
+    }
+}
+
+.footer {
+    bottom: 29px;
+    width: 180px;
+    height: 40px;
+    text-align: center;
+
+    &__yaShare {
+        display: inline-block;
+        vertical-align: middle;
+    }
+
+    &:after {
+        height: 40px;
+        display: inline-block;
+        vertical-align: middle;
+        content: '';
+    }
+}

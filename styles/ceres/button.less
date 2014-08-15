@@ -1,0 +1,215 @@
+
+input[type=button],
+button,
+.btn {
+	padding: 0.3em 0.8em;
+	box-sizing: border-box;
+	line-height: 1.3;
+}
+
+.btn {
+	border: solid 1px;
+	border-color: hsl(0, 0%, 70%) hsl(0, 0%, 65%) hsl(0, 0%, 60%);
+	border-radius: 2px;
+	display: inline-block;
+	box-shadow: 0 1px 1px hsla(0, 0%, 0%, 0.15), inset 0 1px hsla(0, 0%, 100%, 0.5);
+	cursor: pointer;
+	user-select: none;
+	background-color: hsl(0, 0%, 92%);
+	background-image: linear-gradient(to bottom, white 0, hsl(0, 0%, 84%) 100%);
+	background-repeat: repeat-x;
+	color: hsl(0, 0%, 20%);
+	vertical-align: middle;
+	text-align: center;
+	text-decoration: none;
+	text-shadow: 0 1px hsla(0, 0%, 100%, 0.3);
+}
+
+.btn:hover,
+.btn:active,
+.btn__active,
+.btn[disabled],
+.btn__disabled {
+	background-color: hsl(0, 0%, 84%);
+}
+
+.btn:hover {
+	background-position: 0 -0.5em;
+	transition: background-position 0.1s linear;
+}
+
+.btn:active {
+	border-color: hsl(0, 0%, 60%);
+}
+
+.btn:focus {
+	outline-color: navy;
+}
+
+.btn[disabled],
+.btn__disabled {
+	box-shadow: none;
+	cursor: default;
+	opacity: 0.65;
+	background-image: none;
+	text-shadow: none;
+}
+
+.btn__high {
+	padding-top: 0.55em;
+	padding-bottom: 0.55em;
+}
+
+.btn:active,
+.btn.btn__active {
+	box-shadow: 0 1px 2px hsla(0, 0%, 0%, 0.05), inset 0 1px 3px hsla(0, 0%, 0%, 0.3);
+	background-image: none;
+}
+
+.btn__black,
+.btn__red,
+.btn__green,
+.btn__blue {
+	color: white;
+	text-shadow: 0 -1px hsla(0, 0%, 0%, 0.1);
+}
+
+.btn__black {
+	border-color: hsl(0, 0%, 12%) hsl(0, 0%, 7%) hsl(0, 0%, 2%);
+	box-shadow: 0 1px 1px hsla(0, 0%, 0%, 0.25), inset 0 1px hsla(0, 0%, 100%, 0.2);
+	background-color: hsl(0, 0%, 23%);
+	background-image: linear-gradient(to bottom, hsl(0, 0%, 32%), hsl(0, 0%, 14%));
+}
+
+.btn__black:hover,
+.btn__black:active,
+.btn__black.btn__active,
+.btn__black[disabled],
+.btn__black.btn__disabled {
+	background-color: hsl(0, 0%, 14%);
+}
+
+.btn__black:active {
+	border-color: hsl(0, 0%, 2%);
+}
+
+.btn__black:focus {
+	outline-color: mediumvioletred;
+}
+
+.btn__red {
+	border-color: hsl(0, 72%, 42%) hsl(0, 69%, 39%) hsl(0, 66%, 36%);
+	box-shadow: 0 1px 1px hsla(0, 0%, 0%, 0.25), inset 0 1px hsla(0, 0%, 100%, 0.25);
+	background-color: hsl(0, 87%, 57%);
+	background-image: linear-gradient(to bottom, hsl(0, 99%, 69%), hsl(0, 75%, 45%));
+}
+
+.btn__red:hover,
+.btn__red:active,
+.btn__red.btn__active,
+.btn__red[disabled],
+.btn__red.btn__disabled {
+	background-color: hsl(0, 75%, 45%);
+}
+
+.btn__red:active {
+	border-color: hsl(0, 66%, 36%);
+}
+
+.btn__green {
+	border-color: hsl(125, 48%, 38%) hsl(125, 46%, 36%) hsl(125, 44%, 34%);
+	box-shadow: 0 1px 1px hsla(0, 0%, 0%, 0.25), inset 0 1px hsla(0, 0%, 100%, 0.35);
+	background-color: hsl(125, 57%, 47%);
+	background-image: linear-gradient(to bottom, hsl(125, 64%, 54%), hsl(125, 50%, 40%));
+}
+
+.btn__green:hover,
+.btn__green:active,
+.btn__green.btn__active,
+.btn__green[disabled],
+.btn__green.btn__disabled {
+	background-color: hsl(125, 50%, 40%);
+}
+
+.btn__green:active {
+	border-color: hsl(125, 44%, 34%);
+}
+
+.btn__blue {
+	border-color: hsl(220, 82%, 52%) hsl(220, 77%, 47%) hsl(220, 72%, 42%);
+	box-shadow: 0 1px 1px hsla(0, 0%, 0%, 0.25), inset 0 1px hsla(0, 0%, 100%, 0.2);
+	background-color: hsl(220, 93%, 63%);
+	background-image: linear-gradient(to bottom, hsl(220, 100%, 72%), hsl(220, 84%, 54%));
+}
+
+.btn__blue:hover,
+.btn__blue:active,
+.btn__blue.btn__active,
+.btn__blue[disabled],
+.btn__blue.btn__disabled {
+	background-color: hsl(220, 84%, 54%);
+}
+
+.btn__blue:active {
+	border-color: hsl(220, 72%, 42%);
+}
+
+.btn__blue:focus {
+	outline-color: mediumvioletred;
+}
+
+.btn + .btn,
+.buttons_group + .btn,
+.btn + .buttons_group,
+.buttons_group + .buttons_group {
+	margin-left: 0.25em;
+}
+
+.buttons_group:before,
+.buttons_group:after {
+	display: table;
+	content: '';
+}
+
+.buttons_group:after {
+	clear: both;
+}
+
+.buttons_group .btn {
+	margin-left: -1px;
+	border-radius: 0;
+	float: left;
+}
+
+.buttons_group .btn:first-child {
+	margin-left: 0;
+	border-top-left-radius: 2px;
+	border-bottom-left-radius: 2px;
+}
+
+.buttons_group .btn:last-child {
+	border-top-right-radius: 2px;
+	border-bottom-right-radius: 2px;
+}
+
+.button_toolbar .buttons_group {
+	display: inline-block;
+}
+
+html.touch .btn {
+	position: relative;
+}
+
+html.touch .btn:after {
+	position: absolute;
+	left: 0;
+	top: -10px;
+	right: 0;
+	bottom: -10px;
+	content: '';
+}
+
+html.touch.debug .btn:after {
+	opacity: 0.25;
+	background: red;
+}
