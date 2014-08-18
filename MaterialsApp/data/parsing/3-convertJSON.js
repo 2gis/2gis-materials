@@ -1,4 +1,5 @@
 
+var path = require('path');
 var fs = require('fs');
 
 /*var json = JSON.parse(fs.readFileSync('data/all.json', 'utf8'));
@@ -138,7 +139,7 @@ var coords = {
     Cheliabynsk: [55.157388843469953, 61.40270938891512]
 };
 
-var json = JSON.parse(fs.readFileSync('data/parsing/all5.json', 'utf8'));
+var json = JSON.parse(fs.readFileSync(path.join(__dirname, './all5.json'), 'utf8'));
 
 for (var cityName in json) {
     var transliteratedCityName = toCamel(transliteration.transliterate(cityName));
@@ -150,13 +151,17 @@ for (var cityName in json) {
     });
 
     fs.writeFileSync(
-        'data/cities/materials/' + transliteratedCityName + '.jsonp',
+        path.join(__dirname, '../cities/materials/' + transliteratedCityName + '.jsonp'),
         '_setCityMaterials(' + JSON.stringify(json[cityName]) + ');',
         'utf8'
     );
 }
 
-fs.writeFileSync('data/cities/index.jsonp', '_setCitiesIndex(' + JSON.stringify(index) + ');', 'utf8');
+fs.writeFileSync(
+    path.join(__dirname, '../cities/index.jsonp'),
+    '_setCitiesIndex(' + JSON.stringify(index) + ');',
+    'utf8'
+);
 
 
 //var json = JSON.parse(fs.readFileSync('data/all4.json', 'utf8'));
