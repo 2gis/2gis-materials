@@ -2,8 +2,8 @@
 var path = require('path');
 
 var gulp = require('gulp');
-var less = require('gulp-less');
 var concat = require('gulp-concat');
+var less = require('gulp-less');
 
 gulp.task('styles', function() {
     gulp.src([
@@ -11,7 +11,7 @@ gulp.task('styles', function() {
         'button.less',
         'checkbox.less'
     ])
-        .pipe(less({ paths: [path.join(__dirname, 'styles')] }))
+        .pipe(less({ paths: [path.join(__dirname, 'styles/ceres')] }))
         .pipe(concat('ceres.css'))
         .pipe(gulp.dest('build'));
 });

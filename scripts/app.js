@@ -72,6 +72,8 @@ var heatmapLayerConf = {
     valueField: 'count'
 };
 
+window.Rift = Rift;
+
 var MaterialsApp = Rift.createClass(Rift.Emitter, {
     __name: 'MaterialsApp',
 
@@ -96,7 +98,7 @@ var MaterialsApp = Rift.createClass(Rift.Emitter, {
     _btnReadMore: null,
 
     _init: function() {
-        Rift.bindListeners(this);
+        Rift.cl.bindListeners(this);
 
         this.element = document.body;
 
@@ -104,8 +106,9 @@ var MaterialsApp = Rift.createClass(Rift.Emitter, {
             this._findBlocks();
 
             this._map = DG.map(this._bMap, {
-                'center': [54.98, 82.89],
-                'zoom': 13
+                'center': [55.026472, 82.921475],
+                //'center': [54.98, 82.89],
+                'zoom': 12
             });
 
             this._loadScripts(function() {
@@ -121,7 +124,7 @@ var MaterialsApp = Rift.createClass(Rift.Emitter, {
                     this._updateBMaterials();
                     this._bindListeners();
                     this._loadMaterialData(this._selectedCityTransliteratedName, this._updateHeatmapLayers);
-                }.bind(this), { callbackName: '_setData' });
+                }.bind(this), { callbackName: '_setCitiesIndex' });
             }.bind(this));
         }.bind(this));
     },
@@ -265,12 +268,13 @@ var MaterialsApp = Rift.createClass(Rift.Emitter, {
             }
 
             var transliteratedCityName = link.dataset.transliteratedName;
+            var cityData = this._cities[transliteratedCityName];
 
-            this._map.panTo([50, 30]);
+            this._map.panTo(cityData.coords);
 
             this._setCityInControlPanel(transliteratedCityName);
 
-            if (this._cities[transliteratedCityName].materialData === undefined) {
+            if (cityData.materialData === undefined) {
                 this._loadMaterialData(transliteratedCityName, this._updateHeatmapLayers);
             } else {
                 this._updateHeatmapLayers();
@@ -317,7 +321,7 @@ var MaterialsApp = Rift.createClass(Rift.Emitter, {
 
                 loadingEmitter.emit('loaded:' + transliteratedCityName);
             },
-            { callbackName: '_setData' }
+            { callbackName: '_setCityMaterials' }
         );
     },
 
