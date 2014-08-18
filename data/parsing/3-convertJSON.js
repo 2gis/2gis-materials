@@ -120,21 +120,43 @@ var transliteration = require('transliteration.cyr');
 
 var index = [];
 
+var coords = {
+    Volgograd: [48.74362, 44.50425],
+    Voronezh: [51.66073, 39.200594],
+    Ekaterynburg: [56.839656381384216, 60.616420410349818],
+    Kazan: [55.797601775811387, 49.103487955454554],
+    Krasnoiarsk: [56.0054976788325, 92.830744681366028],
+    Moskva: [55.753466, 37.62017],
+    NyzhnyiNovgorod: [56.325883629590777, 43.991050427169455],
+    Novosybyrsk: [55.026472, 82.921475],
+    Omsk: [54.962357, 73.393009],
+    Perm: [58.009248091788066, 56.223394926939079],
+    RostovNaDonu: [47.222099166157996, 39.69177143437188],
+    Samara: [53.194952720681229, 50.10423057974846],
+    SanktPeterburg: [59.937577, 30.283631],
+    Ufa: [54.731778818354414, 55.945969234546823],
+    Cheliabynsk: [55.157388843469953, 61.40270938891512]
+};
+
 var json = JSON.parse(fs.readFileSync('data/parsing/all5.json', 'utf8'));
 
 for (var cityName in json) {
     var transliteratedCityName = toCamel(transliteration.transliterate(cityName));
 
-    index.push({ name: cityName, transliteratedName: transliteratedCityName });
+    index.push({
+        name: cityName,
+        transliteratedName: transliteratedCityName,
+        coords: coords[transliteratedCityName]
+    });
 
     fs.writeFileSync(
         'data/cities/materials/' + transliteratedCityName + '.jsonp',
-        '_setData(' + JSON.stringify(json[cityName]) + ');',
+        '_setCityMaterials(' + JSON.stringify(json[cityName]) + ');',
         'utf8'
     );
 }
 
-fs.writeFileSync('data/cities/index.jsonp', '_setData(' + JSON.stringify(index) + ');', 'utf8');
+fs.writeFileSync('data/cities/index.jsonp', '_setCitiesIndex(' + JSON.stringify(index) + ');', 'utf8');
 
 
 //var json = JSON.parse(fs.readFileSync('data/all4.json', 'utf8'));
