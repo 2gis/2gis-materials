@@ -100,7 +100,7 @@ var MaterialsApp = Rift.createClass(Rift.Emitter, {
     _btnReadMore: null,
 
     _init: function() {
-        Rift.cl.bindListeners(this);
+        Rift.proto.bindListeners(this);
 
         this.element = document.body;
         this.element.insertAdjacentHTML('beforeend', tmpl(this));

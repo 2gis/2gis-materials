@@ -3,8 +3,8 @@
  * @param {string} re
  * @returns {string}
  */
-function escapeRegExp(re) {
+function escape(re) {
     return re.replace(/([?![+\-\.]^|{}(=:)$\/\\*])/g, '\\$1');
 }
 
-exports.escape = escapeRegExp;
+exports.escape = escape;

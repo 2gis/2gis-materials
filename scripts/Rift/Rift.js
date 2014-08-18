@@ -1,16 +1,16 @@
 
-var Rift = module.exports = {};
+exports.utils = require('./utils');
+exports.object = require('./object');
+exports.regex = require('./regex');
+exports.string = require('./string');
 
-Rift.utils = require('./utils');
-Rift.object = require('./object');
+var proto = require('./proto');
 
-var cl = require('./cl');
+exports.proto = proto;
+exports.createClass = proto.createClass;
 
-Rift.cl = cl;
-Rift.createClass = cl.createClass;
+exports.Emitter = require('./Emitter');
 
-Rift.regex = require('./regex');
-Rift.string = require('./string');
-Rift.dom = require('./dom');
-Rift.ajax = require('./ajax');
-Rift.Emitter = require('./Emitter');
+exports.html = require('html');
+exports.dom = require('./dom');
+exports.ajax = require('./ajax');

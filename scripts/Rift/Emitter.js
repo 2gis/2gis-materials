@@ -1,9 +1,9 @@
 
 var object = require('./object');
 var getUID = object.getUID;
-var cl = require('./cl');
+var proto = require('./proto');
 
-var Emitter = module.exports = cl.createClass({
+var Emitter = module.exports = proto.createClass({
     __name: 'Rift.Emitter',
 
     _events: null,
