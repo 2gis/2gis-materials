@@ -1,6 +1,6 @@
 
-var tmpl = require('./tmpl');
-var format = tmpl.format;
+var string = require('./string');
+var format = string.format;
 
 /**
  * @param {Node} node

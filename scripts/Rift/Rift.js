@@ -10,7 +10,7 @@ Rift.cl = cl;
 Rift.createClass = cl.createClass;
 
 Rift.regex = require('./regex');
-Rift.tmpl = require('./tmpl');
+Rift.string = require('./string');
 Rift.dom = require('./dom');
 Rift.ajax = require('./ajax');
 Rift.Emitter = require('./Emitter');

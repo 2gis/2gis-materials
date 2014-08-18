@@ -1,4 +1,4 @@
 /node_modules
 .DS_Store
-/data/parsing/*.json
+/MaterialsApp/data/parsing/*.json
 /build

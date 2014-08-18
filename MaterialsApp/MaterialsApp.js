@@ -1,5 +1,7 @@
 
-var Rift = require('./Rift/Rift');
+var Rift = require('../scripts/Rift/Rift');
+
+var tmpl = require('./MaterialsApp.hbs');
 
 /**
  * @param {string} hex
@@ -101,6 +103,7 @@ var MaterialsApp = Rift.createClass(Rift.Emitter, {
         Rift.cl.bindListeners(this);
 
         this.element = document.body;
+        this.element.insertAdjacentHTML('beforeend', tmpl(this));
 
         DG.then(function() {
             this._findBlocks();
@@ -114,7 +117,7 @@ var MaterialsApp = Rift.createClass(Rift.Emitter, {
             this._loadScripts(function() {
                 this._createHeatmapLayers();
 
-                Rift.ajax.jsonp('data/cities/index.jsonp', function(cities) {
+                Rift.ajax.jsonp('MaterialsApp/data/cities/index.jsonp', function(cities) {
                     this._cities = cities.reduce(function(cities, cityData) {
                         cities[cityData.transliteratedName] = cityData;
                         return cities;
@@ -157,7 +160,7 @@ var MaterialsApp = Rift.createClass(Rift.Emitter, {
             heatmapLayers[materialName] = new HeatmapOverlay(
                 Rift.object.assign(Object.create(heatmapLayerConf), {
                     gradient: {
-                        0: Rift.tmpl.format('rgba(%1, %2, %3, 0)', hexToRGB(color)),
+                        0: Rift.string.format('rgba(%1, %2, %3, 0)', hexToRGB(color)),
                         1: color
                     }
                 })
@@ -314,7 +317,7 @@ var MaterialsApp = Rift.createClass(Rift.Emitter, {
         cityData.loadingMaterialData = true;
 
         Rift.ajax.jsonp(
-            'data/cities/materials/' + transliteratedCityName + '.jsonp',
+            'MaterialsApp/data/cities/materials/' + transliteratedCityName + '.jsonp',
             function(materialData) {
                 cityData.loadingMaterialData = false;
                 cityData.materialData = materialData;
