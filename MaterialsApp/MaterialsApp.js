@@ -437,6 +437,7 @@ var MaterialsApp = Rift.createClass(Rift.Emitter, {
         }
 
         this._cityListIsShown = true;
+        this.element.classList.add('_cityList');
         this._bControlPanel.classList.add('_cityList');
 
         return true;
@@ -451,6 +452,7 @@ var MaterialsApp = Rift.createClass(Rift.Emitter, {
         }
 
         this._cityListIsShown = false;
+        this.element.classList.remove('_cityList');
         this._bControlPanel.classList.remove('_cityList');
 
         return true;
