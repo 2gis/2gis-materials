@@ -1,0 +1,34 @@
+@-webkit-keyframes preloader__animation {
+    to {
+        -webkit-transform: rotate(360deg);
+    }
+}
+@keyframes preloader__animation {
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+.preloader {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    display: none;
+
+    &:before {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        width: 34px;
+        height: 34px;
+        margin: -17px 0 0 -17px;
+        outline: 1px solid transparent; // фикс рендера изображения для Firefox
+        image-rendering: optimizeQuality;
+        background-image: url("../images/preloader_lighten.svg");
+        -webkit-animation: preloader__animation 5s linear infinite;
+        animation: preloader__animation 5s linear infinite;
+        content: '';
+    }
+}

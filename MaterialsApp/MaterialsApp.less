@@ -2,6 +2,8 @@
 @import "../styles/ceres/base.less";
 @import "../styles/ceres/checkbox.less";
 
+@import "preloader.less";
+
 @font-face {
     font-family: "SuisseCond";
     src: url("../fonts/SuisseIntl-Cond.eot");
@@ -91,6 +93,10 @@ body {
         }
     }
 
+    &._loading &__city {
+        visibility: hidden;
+    }
+
     &__cityLogo {
         width: 28px;
         height: 28px;
@@ -153,6 +159,10 @@ body {
     }
 
     &__mainContent {
+    }
+
+    &._loading &__mainContent {
+        visibility: hidden;
     }
 
     &__materials {
@@ -237,7 +247,7 @@ body {
         opacity: 1;
     }
 
-    ._state-cityList &__materials {
+    &._cityList &__materials {
         display: none;
     }
 
@@ -264,11 +274,11 @@ body {
         color: #ffc84b;
     }
 
-    ._state-cityList &__cityList {
+    &._cityList &__cityList {
         display: block;
     }
 
-    &_readMore {
+    &__readMore {
         position: absolute;
         top: 10px;
         right: 10px;
@@ -282,9 +292,23 @@ body {
         line-height: 14px;
     }
 
-    &_readMore:hover {
+    &__readMore:hover {
         background-image: none;
         color: #ffc84b;
+    }
+
+    &._loading &__readMore {
+        visibility: hidden;
+    }
+
+    .preloader {
+    }
+
+    &._loading .preloader {
+        display: block;
+    }
+
+    &._loading {
     }
 }
 

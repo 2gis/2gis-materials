@@ -5,7 +5,7 @@
     <h1 class="header__title">Из чего построен город</h1>
 </div>
 
-<div class="controlPanel">
+<div data-name="bControlPanel" class="controlPanel">
     <a data-name="tfCity" href="#selectCity" class="controlPanel__city">
         <span class="controlPanel__cityLogo"></span>
         <span class="controlPanel__cityName"></span>
@@ -16,7 +16,11 @@
         <ul data-name="bCityList" class="controlPanel__cityList"></ul>
     </div>
 
-    <a data-name="btnReadMore" class="controlPanel_readMore" href="#readMore">Подробнее</a>
+    <a data-name="btnReadMore" class="controlPanel__readMore"
+            href="http://info.2gis.ru/company/news/moskva-samyy-betonnyy-gorod-rossii-novosibirsk-samyy-derevyannyy"
+            target="_blank">Подробнее</a>
+
+    <div class="preloader"></div>
 </div>
 
 <div class="footer">

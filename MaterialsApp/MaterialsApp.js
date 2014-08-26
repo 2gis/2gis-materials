@@ -66,7 +66,7 @@ var heatmapLayerConf = {
 
     // if set to false the heatmap uses the global maximum for colorization
     // if activated: uses the data maximum within the current map boundaries
-    //   (there will always be a red spot with useLocalExtremas true)
+    // (there will always be a red spot with useLocalExtremas true)
     useLocalExtrema: true,
 
     latField: 'lat',
@@ -92,6 +92,7 @@ var MaterialsApp = Rift.createClass(Rift.Emitter, {
 
     element: null,
     _bMap: null,
+    _bControlPanel: null,
     _tfCity: null,
     _bMaterials: null,
     _bcMaterialOptions: null,
@@ -159,6 +160,7 @@ var MaterialsApp = Rift.createClass(Rift.Emitter, {
         var el = this.element;
 
         this._bMap = el.querySelector('[data-name=bMap]');
+        this._bControlPanel = el.querySelector('[data-name=bControlPanel]');
         this._tfCity = el.querySelector('[data-name=tfCity]');
         this._bMaterials = el.querySelector('[data-name=bMaterials]');
         this._bCityList = el.querySelector('[data-name=bCityList]');
@@ -343,16 +345,20 @@ var MaterialsApp = Rift.createClass(Rift.Emitter, {
             return;
         }
 
+        this._bControlPanel.classList.add('_loading');
+
         cityData.loadingMaterialData = true;
 
         Rift.ajax.jsonp(
             'MaterialsApp/data/cities/materials/' + transliteratedCityName + '.jsonp',
             function(materialData) {
+                this._bControlPanel.classList.remove('_loading');
+
                 cityData.loadingMaterialData = false;
                 cityData.materialData = materialData;
 
                 loadingEmitter.emit('loaded:' + transliteratedCityName);
-            },
+            }.bind(this),
             { callbackName: '_setCityMaterials' }
         );
     },
@@ -431,7 +437,7 @@ var MaterialsApp = Rift.createClass(Rift.Emitter, {
         }
 
         this._cityListIsShown = true;
-        this.element.classList.add('_state-cityList');
+        this._bControlPanel.classList.add('_cityList');
 
         return true;
     },
@@ -445,7 +451,7 @@ var MaterialsApp = Rift.createClass(Rift.Emitter, {
         }
 
         this._cityListIsShown = false;
-        this.element.classList.remove('_state-cityList');
+        this._bControlPanel.classList.remove('_cityList');
 
         return true;
     },
