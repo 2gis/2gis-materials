@@ -12,4 +12,4 @@
 * ``/fonts/**``
 * ``/MaterialsApp/data/cities/**``
  
-При деплое в папку fonts добавить шрифт SuisseIntl-Cond
+При деплое в папку fonts добавить шрифт SuisseIntl-Cond.

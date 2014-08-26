@@ -5,7 +5,7 @@
 @import "preloader.less";
 
 @font-face {
-    font-family: "SuisseCond";
+    font-family: "SuisseCondNoConflict";
     src: url("../fonts/SuisseIntl-Cond.eot");
     src: url("../fonts/SuisseIntl-Cond.eot?#iefix") format("embedded-opentype"),
          url("../fonts/SuisseIntl-Cond.woff") format("woff"),
@@ -15,8 +15,9 @@
 }
 
 body {
-    font: 16px/20px SuisseCond, "Arial Narrow", Helvetica, Arial, sans-serif;
+    font: 16px/20px SuisseCondNoConflict, "Arial Narrow", Helvetica, Arial, sans-serif;
     -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
 }
 
 .leaflet-zoom-hide {
