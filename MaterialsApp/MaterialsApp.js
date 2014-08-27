@@ -151,7 +151,7 @@ var MaterialsApp = Rift.createClass(Rift.Emitter, {
                             //
                         }
                     });
-                }.bind(this), { callbackName: '_setCitiesIndex' });
+                }.bind(this), { callbackName: '_setCitiesIndex', timeout: 120000 });
             });
         }.bind(this));
     },
@@ -359,7 +359,7 @@ var MaterialsApp = Rift.createClass(Rift.Emitter, {
 
                 loadingEmitter.emit('loaded:' + transliteratedCityName);
             }.bind(this),
-            { callbackName: '_setCityMaterials' }
+            { callbackName: '_setCityMaterials', timeout: 120000 }
         );
     },
 
