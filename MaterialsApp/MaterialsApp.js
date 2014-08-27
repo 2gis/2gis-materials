@@ -252,7 +252,7 @@ var MaterialsApp = Rift.createClass(Rift.Emitter, {
             );
 
             bcMaterialOptions[materialName] = label.firstChild;
-            bMaterials.appendChild(label);
+            bMaterials.appendChild(Rift.dom.createElement('div', null, [label]));
 
             return bcMaterialOptions;
         }, {});
@@ -296,7 +296,7 @@ var MaterialsApp = Rift.createClass(Rift.Emitter, {
                 return;
             }
 
-            var transliteratedCityName = link.dataset.transliteratedName;
+            var transliteratedCityName = link.getAttribute('data-transliterated-name');
             var cityData = this._cities[transliteratedCityName];
 
             this._map.panTo(cityData.coords);
@@ -386,7 +386,7 @@ var MaterialsApp = Rift.createClass(Rift.Emitter, {
 
         Object.keys(counts).forEach(function(materialName) {
             var percent = (counts[materialName] / sum * 100).toFixed(2) + '%';
-            this._bcMaterialOptions[materialName].parentNode.dataset.percent = percent;
+            this._bcMaterialOptions[materialName].parentNode.setAttribute('data-percent', percent);
         }, this);
     },
 

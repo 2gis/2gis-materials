@@ -167,13 +167,22 @@ body {
     }
 
     &__materials {
+        width: 100%;
         height: 60px;
         margin: 0;
-        padding: 0 22px;
+        padding: 0 18px;
         border: 0;
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
+        display: table; // Йобаный ИЕ
+        box-sizing: border-box;
+        //display: flex;
+        //justify-content: space-between;
+        //align-items: center;
+    }
+
+    &__materials > div {
+        display: table-cell;
+        vertical-align: middle;
+        text-align: center;
     }
 
     &__materials .chb {
