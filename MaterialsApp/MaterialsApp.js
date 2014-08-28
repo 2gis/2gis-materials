@@ -129,7 +129,7 @@ var MaterialsApp = Rift.createClass(Rift.Emitter, {
                         return cities;
                     }, {});
 
-                    var transliteratedCityName = urlMap[location.hash.slice(1).toLowerCase()] || 'Novosibirsk';
+                    var transliteratedCityName = urlMap[location.hash.slice(1).toLowerCase()] || 'Moscow';
 
                     this._map = DG.map(this._bMap, {
                         center: this._cities[transliteratedCityName].coords,

@@ -169,7 +169,7 @@ body {
     &__materials {
         width: 100%;
         height: 60px;
-        margin: 0;
+        margin: 0 0 16px;
         padding: 0 18px;
         border: 0;
         display: table; // Йобаный ИЕ
@@ -190,22 +190,11 @@ body {
 
         &:before {
             position: absolute;
-            left: 50%;
-            bottom: 24px;
-            width: 58px;
-            margin-left: -24px;
-            border: 1px solid hsla(42, 100%, 65%, 80%);
-            display: none;
-            background: hsla(0, 0%, 0%, 60%);
-            color: white;
-            text-align: center;
-            font-size: 0.9em;
+            top: 22px;
+            left: 24px;
+            color: #ffc84b;
             line-height: 24px;
             content: attr(data-percent);
-        }
-
-        &:hover:before {
-            display: block;
         }
     }
 
