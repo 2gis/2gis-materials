@@ -169,8 +169,8 @@ body {
     &__materials {
         width: 100%;
         height: 60px;
-        margin: 0 0 16px;
-        padding: 0 18px;
+        margin: 0 0 32px;
+        padding: 0 22px;
         border: 0;
         display: table; // Йобаный ИЕ
         box-sizing: border-box;
@@ -190,9 +190,12 @@ body {
 
         &:before {
             position: absolute;
-            top: 22px;
-            left: 24px;
-            color: #ffc84b;
+            top: 27px;
+            left: 7px;
+            padding: 3px 5px 0;
+            border-top: 2px solid;
+            text-align: center;
+            font-size: 1.2em;
             line-height: 24px;
             content: attr(data-percent);
         }
@@ -206,6 +209,26 @@ body {
         box-shadow: inset 0 0 1px hsl(0, 0%, 65%), inset 0 0 1px 2px hsla(0, 0%, 65%, 0.4);
         background-color: black;
         background-image: none;
+    }
+
+    &__materials .chb._material-wood:before {
+        border-color: #b47e4d;
+    }
+
+    &__materials .chb._material-brick:before {
+        border-color: #ff6464;
+    }
+
+    &__materials .chb._material-panel:before {
+        border-color: #008965;
+    }
+
+    &__materials .chb._material-concrete:before {
+        border-color: #a04089;
+    }
+
+    &__materials .chb._material-metal:before {
+        border-color: #0088ff;
     }
 
     &__materials .chb:hover input:enabled + span {
