@@ -411,9 +411,7 @@ var MaterialsApp = Rift.createClass(Rift.Emitter, {
 
             this._map.addLayer(heatmapLayers[materialName]);
 
-            var heatmapLayerData = Object.keys(cityData.materialData[materialName]).map(function(id) {
-                var item = this[id];
-
+            var heatmapLayerData = cityData.materialData[materialName].map(function(item) {
                 return {
                     lat: +item[1],
                     lng: +item[0],

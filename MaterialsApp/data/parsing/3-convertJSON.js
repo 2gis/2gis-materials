@@ -188,6 +188,19 @@ for (var cityName in json) {
         coords: coords[transliteratedCityName]
     });
 
+	Object.keys(json[cityName]).forEach(function(materialName) {
+		var dataByMaterial = this[materialName];
+
+		this[materialName] = Object.keys(dataByMaterial).reduce(function(newDataByMaterial, itemId) {
+			var item = dataByMaterial[itemId];
+			newDataByMaterial.push([Number(Number(item[0]).toFixed(5)), Number(Number(item[1]).toFixed(5))]);
+			return newDataByMaterial;
+		}, []);
+	}, json[cityName]);
+
+	//console.log(JSON.stringify(json[cityName]));
+	//break;
+
     fs.writeFileSync(
         path.join(__dirname, '../cities/materials/' + transliteratedCityName + '.jsonp'),
         '_setCityMaterials(' + JSON.stringify(json[cityName]) + ');',
