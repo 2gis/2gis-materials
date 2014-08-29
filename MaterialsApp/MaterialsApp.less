@@ -190,14 +190,16 @@ body {
 
         &:before {
             position: absolute;
-            top: 27px;
+            top: 100%;
             left: 0;
-            width: 88%;
-            padding: 3px 5px 0;
+            width: 110%;
+            margin-top: 8px;
+
             border-top: 2px solid;
+            box-sizing:border-box;
             text-align: center;
             font-size: 1.2em;
-            line-height: 24px;
+            line-height: 30px;
             content: attr(data-percent);
         }
     }
