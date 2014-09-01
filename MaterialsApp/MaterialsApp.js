@@ -246,7 +246,7 @@ var MaterialsApp = Rift.createClass(Rift.Emitter, {
 
         this._bcMaterialOptions = Object.keys(materials).reduce(function(bcMaterialOptions, materialName) {
             var label = Rift.dom.createElementFromHTML(
-                '<label class="chb _material-%1"><input type="checkbox" checked="checked" /><span></span>%2</label>',
+                '<label class="chb _material-%1"><input type="checkbox" /><span></span>%2</label>',
                 materials[materialName].enName,
                 materialName
             );
@@ -384,9 +384,15 @@ var MaterialsApp = Rift.createClass(Rift.Emitter, {
             sum += count;
         });
 
+        var popularMaterialName = Object.keys(counts).sort(function(key1, key2) { return counts[key2] - counts[key1] })[0];
         Object.keys(counts).forEach(function(materialName) {
             var percent = (counts[materialName] / sum * 100).toFixed(2) + '%';
             this._bcMaterialOptions[materialName].parentNode.setAttribute('data-percent', percent);
+            if (materialName == popularMaterialName) {
+                this._bcMaterialOptions[materialName].setAttribute('checked', '');
+            } else {
+                this._bcMaterialOptions[materialName].removeAttribute('checked');
+            }
         }, this);
     },
 
