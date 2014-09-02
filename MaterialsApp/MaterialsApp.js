@@ -384,16 +384,18 @@ var MaterialsApp = Rift.createClass(Rift.Emitter, {
             sum += count;
         });
 
-        var popularMaterialName = Object.keys(counts).sort(function(key1, key2) { return counts[key2] - counts[key1] })[0];
-        Object.keys(counts).forEach(function(materialName) {
-            var percent = (counts[materialName] / sum * 100).toFixed(2) + '%';
-            this._bcMaterialOptions[materialName].parentNode.setAttribute('data-percent', percent);
-            if (materialName == popularMaterialName) {
-                this._bcMaterialOptions[materialName].setAttribute('checked', '');
-            } else {
-                this._bcMaterialOptions[materialName].removeAttribute('checked');
-            }
-        }, this);
+        Object.keys(counts)
+            .sort(function(a, b) {
+                return counts[b] - counts[a];
+            })
+            .forEach(function(materialName, index) {
+                var bMaterialOption = this._bcMaterialOptions[materialName];
+                var bMaterialOptionLabel = bMaterialOption.parentNode;
+
+                bMaterialOption.checked = index == 0;
+                bMaterialOptionLabel.setAttribute('data-percent', (counts[materialName] / sum * 100).toFixed(2) + '%');
+                this._bMaterials.appendChild(bMaterialOptionLabel.parentNode);
+            }, this);
     },
 
     _updateHeatmapLayers: function() {
