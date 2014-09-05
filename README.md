@@ -8,8 +8,6 @@
 Настроить nginx на раздачу ресурсов из следующийх директорий:
 * ``/index.html``
 * ``/public/**``
-* ``/images/**``
-* ``/fonts/**``
 * ``/MaterialsApp/data/cities/**``
  
 При деплое в папку fonts добавить шрифт SuisseIntl-Cond.
