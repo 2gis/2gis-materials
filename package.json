@@ -1,6 +1,6 @@
 {
   "name": "2gis-materials",
-  "version": "0.3.0",
+  "version": "1.0.0",
   "description": "Heatmaps plugin demo",
   "main": "index.js",
   "dependencies": {
