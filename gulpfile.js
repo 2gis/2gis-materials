@@ -5,16 +5,19 @@ var gulp = require('gulp');
 var es = require('event-stream');
 var concat = require('gulp-concat');
 var rename = require('gulp-rename');
+var cache = require('gulp-cached');
+var remember = require('gulp-remember');
 
 var browserify = require('gulp-browserify');
 var browserifyHandlebars = require('browserify-handlebars');
 var uglify = require('gulp-uglify');
 
-var less = require('gulp-less');
-var rewriteCSS = require('gulp-rewrite-css');
-var prefix = require('gulp-autoprefixer');
 var imagemin = require('gulp-imagemin');
 var pngcrush = require('imagemin-pngcrush');
+
+var less = require('gulp-less');
+var prefix = require('gulp-autoprefixer');
+var rewriteCSS = require('gulp-rewrite-css');
 var cssBase64 = require('gulp-css-base64');
 var csso = require('gulp-csso');
 
@@ -43,8 +46,10 @@ gulp.task('scripts', function() {
             'node_modules/heatmap.js/build/heatmap.js',
             'node_modules/heatmap.js/plugins/leaflet-heatmap.js'
         ])
-            .pipe(concat('heatmap.js'))
+            .pipe(cache('scripts1'))
             .pipe(uglify())
+            .pipe(remember('scripts1'))
+            .pipe(concat('heatmap.js'))
             .pipe(rename({ suffix: '.min' }))
             .pipe(gulp.dest('public'))
     );
@@ -68,9 +73,9 @@ gulp.task('images', function() {
 gulp.task('styles', function() {
     return gulp.src(['MaterialsApp/MaterialsApp.less'])
         .pipe(less({ paths: [path.join(__dirname, 'MaterialsApp')] }))
-        .pipe(rewriteCSS({ destination: '.' }))
         .pipe(prefix('last 1 version', '> 1%'))
         .pipe(rename('MaterialsApp.css'))
+        .pipe(rewriteCSS({ destination: '.' }))
         .pipe(gulp.dest('public'))
         .pipe(cssBase64({
             verbose: true,
