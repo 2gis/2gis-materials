@@ -5,13 +5,13 @@
 @import "preloader.less";
 
 @font-face {
+    font-weight: normal;
+    font-style: normal;
     font-family: "SuisseCondNoConflict";
     src: url("../fonts/SuisseIntl-Cond.eot");
     src: url("../fonts/SuisseIntl-Cond.eot?#iefix") format("embedded-opentype"),
          url("../fonts/SuisseIntl-Cond.woff") format("woff"),
          url("../fonts/SuisseIntl-Cond.svg#suisse_intlcondensed") format("svg");
-    font-weight: normal;
-    font-style: normal;
 }
 
 body {
@@ -81,8 +81,8 @@ body {
     top: 106px;
 
     &__city {
-        padding: 15px 22px 0;
         display: inline-block;
+        padding: 15px 22px 0;
         color: white;
         text-decoration: none;
         font-size: 32px;
@@ -99,9 +99,9 @@ body {
     }
 
     &__cityLogo {
+        display: inline-block;
         width: 28px;
         height: 28px;
-        display: inline-block;
         background-position: 50% 50%;
         background-repeat: no-repeat;
     }
@@ -167,16 +167,13 @@ body {
     }
 
     &__materials {
-        width: 100%;
-        height: 60px;
+        display: table;
+        box-sizing: border-box;
         margin: 0 0 32px;
         padding: 0 18px;
+        width: 100%;
+        height: 60px;
         border: 0;
-        display: table; // Йобаный ИЕ
-        box-sizing: border-box;
-        //display: flex;
-        //justify-content: space-between;
-        //align-items: center;
     }
 
     &__materials > div {
@@ -192,15 +189,14 @@ body {
             position: absolute;
             top: 100%;
             left: 0;
-            width: 110%;
-            margin-top: 8px;
-
-            border-top: 2px solid;
             box-sizing:border-box;
+            margin-top: 8px;
+            width: 110%;
+            border-top: 2px solid;
+            content: attr(data-percent);
             text-align: center;
             font-size: 1.2em;
             line-height: 30px;
-            content: attr(data-percent);
         }
     }
 
@@ -209,27 +205,23 @@ body {
         margin-left: 0;
         border-color: hsl(0, 0%, 65%);
         border-radius: 50%;
-        box-shadow: inset 0 0 1px hsl(0, 0%, 65%), inset 0 0 1px 2px hsla(0, 0%, 65%, 0.4);
         background-color: black;
         background-image: none;
+        box-shadow: inset 0 0 1px hsl(0, 0%, 65%), inset 0 0 1px 2px hsla(0, 0%, 65%, 0.4);
     }
 
     &__materials .chb._material-wood:before {
         border-color: #b47e4d;
     }
-
     &__materials .chb._material-brick:before {
         border-color: #ff6464;
     }
-
     &__materials .chb._material-panel:before {
         border-color: #008965;
     }
-
     &__materials .chb._material-concrete:before {
         border-color: #a04089;
     }
-
     &__materials .chb._material-metal:before {
         border-color: #0088ff;
     }
@@ -246,19 +238,15 @@ body {
     &__materials .chb._material-wood input:enabled + span:after {
         background-color: #b47e4d;
     }
-
     &__materials .chb._material-brick input:enabled + span:after {
         background-color: #ff6464;
     }
-
     &__materials .chb._material-panel input:enabled + span:after {
         background-color: #008965;
     }
-
     &__materials .chb._material-concrete input:enabled + span:after {
         background-color: #a04089;
     }
-
     &__materials .chb._material-metal input:enabled + span:after {
         background-color: #0088ff;
     }
@@ -277,15 +265,15 @@ body {
     }
 
     &__cityList {
+        display: none;
         margin: 0;
         padding: 10px 0;
-        display: none;
         list-style: none;
     }
 
     &__cityList a {
-        margin: 3px 19px;
         display: inline-block;
+        margin: 3px 19px;
         background-image: linear-gradient(to right, hsla(0, 0%, 65%, 0.8), hsla(0, 0%, 65%, 0.1));
         background-position: 0 95%;
         background-size: 2px 1px;
@@ -349,10 +337,10 @@ body {
     }
 
     &:after {
-        height: 40px;
         display: inline-block;
-        vertical-align: middle;
+        height: 40px;
         content: '';
+        vertical-align: middle;
     }
 
     ._cityList & {
