@@ -1,14 +1,17 @@
 
 var path = require('path');
 
-var gulp = require('gulp');
 var es = require('event-stream');
+var source = require('vinyl-source-stream');
+var streamify = require('gulp-streamify');
+
+var gulp = require('gulp');
 var concat = require('gulp-concat');
 var rename = require('gulp-rename');
 var cache = require('gulp-cached');
 var remember = require('gulp-remember');
 
-var browserify = require('gulp-browserify');
+var browserify = require('browserify');
 var browserifyHandlebars = require('browserify-handlebars');
 var uglify = require('gulp-uglify');
 
@@ -24,19 +27,18 @@ var csso = require('gulp-csso');
 var connect = require('gulp-connect');
 
 gulp.task('scripts', function() {
+    var b = browserify('./MaterialsApp/MaterialsApp.js');
+
+    b.transform(browserifyHandlebars);
+
     return es.concat(
         es.concat(
             gulp.src(['scripts/Rift/shim.js']),
 
-            gulp.src(['MaterialsApp/MaterialsApp.js'])
-                .pipe(browserify({
-                    transform: [browserifyHandlebars],
-                    insertGlobals: false,
-                    detectGlobals: false,
-                    debug: !gulp.env.production
-                }))
+            b.bundle()
+                .pipe(source('MaterialsApp/MaterialsApp.js'))
         )
-            .pipe(concat('MaterialsApp.js'))
+            .pipe(streamify(concat('MaterialsApp.js')))
             .pipe(gulp.dest('public'))
             .pipe(uglify())
             .pipe(rename({ suffix: '.min' }))
