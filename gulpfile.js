@@ -27,15 +27,15 @@ var csso = require('gulp-csso');
 var connect = require('gulp-connect');
 
 gulp.task('scripts', function() {
-    var b = browserify('./MaterialsApp/MaterialsApp.js');
+    var bundler = browserify('./MaterialsApp/MaterialsApp.js');
 
-    b.transform(browserifyHandlebars);
+    bundler.transform(browserifyHandlebars);
 
     return es.concat(
         es.concat(
             gulp.src(['scripts/Rift/shim.js']),
 
-            b.bundle()
+            bundler.bundle()
                 .pipe(source('MaterialsApp/MaterialsApp.js'))
         )
             .pipe(streamify(concat('MaterialsApp.js')))
@@ -91,7 +91,7 @@ gulp.task('styles', function() {
 });
 
 gulp.task('view', ['images'], function() {
-    gulp.run('styles');
+    gulp.start('styles');
 });
 
 gulp.task('all', ['scripts', 'view']);

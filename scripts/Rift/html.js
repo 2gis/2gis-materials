@@ -14,7 +14,7 @@ exports.escape = escape;
  * @returns {string}
  */
 function whitespaceToHTML(str) {
-    return str.replace(/\r\n|\r|\n/g, '<br />').replace(/\t/g, '    ').replace(/\s\s/g, ' &nbsp;');
+    return str.replace(/\r\n|\r|\n/g, '<br>').replace(/\t/g, '    ').replace(/\s\s/g, ' &nbsp;');
 }
 
 exports.whitespaceToHTML = whitespaceToHTML;
